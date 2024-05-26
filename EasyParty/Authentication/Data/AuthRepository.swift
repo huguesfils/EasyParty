@@ -18,7 +18,7 @@ protocol AuthRepository {
     
     func signOut() throws
     
-    func fetchUserData(_ id: String) async throws -> User
+//    func fetchUserData(_ id: String) async throws -> User
 }
 
 struct DefaultAuthRepository: AuthRepository {
@@ -53,11 +53,11 @@ struct DefaultAuthRepository: AuthRepository {
     }
     
     
-    func fetchUserData(_ id: String) async throws -> User {
-        return await authService.fetchUserData(id)
-            .map { $0.toDomain() }
-            .mapError { $0.toDomain() }
-    }
+//    func fetchUserData(_ id: String) async throws -> User {
+//        return await authService.fetchUserData(id)
+//            .map { $0.toDomain() }
+//            .mapError { $0.toDomain() }
+//    }
 }
 
 

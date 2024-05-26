@@ -25,9 +25,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct EasyPartyApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginView(viewModel: .init(loginWithAppleUseCase: AuthInjector.loginWithAppleUseCase(), buttonLoginInWithAppleUseCase: AuthInjector.buttonLoginInWithAppleUseCase()))
         }
     }
 }

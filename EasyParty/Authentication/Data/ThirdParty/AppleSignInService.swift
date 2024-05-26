@@ -15,17 +15,23 @@ enum AppleSignInError: Error {
     case tokenError
 }
 
+struct AppleSignInUser {
+    let token: String
+    let nonce: String
+    let email: String?
+    let givenName: String?
+    let familyName: String?
+}
+
 protocol AppleSignInService {
-    func signInButton(_ completion: @escaping (Result<String, AppleSignInError>) -> Void) -> any View
+    func signInButton(_ completion: @escaping (Result<AppleSignInUser, AppleSignInError>) -> Void) -> AppleSignInButton
 }
 
 struct DefaultAppleSignInService: AppleSignInService {
-    func signInButton(_ completion: @escaping (Result<String, AppleSignInError>) -> Void) -> any View {
-        SignInWithAppleButton(.signIn) { request in
-            handleRequest(request)
-        } onCompletion: { result in
-            completion(handleResult(result))
-        }
+    func signInButton(_ completion: @escaping (Result<AppleSignInUser, AppleSignInError>) -> Void) -> AppleSignInButton {
+        AppleSignInButton(onRequest: handleRequest(_:), onCompletion: {
+           completion(handleResult($0))
+        })
     }
     
     let currentNonce = randomNonceString()
@@ -35,7 +41,7 @@ struct DefaultAppleSignInService: AppleSignInService {
         request.nonce = sha256(currentNonce)
     }
     
-    private func handleResult(_ result: Result<ASAuthorization, Error>) -> Result<String, AppleSignInError> {
+    private func handleResult(_ result: Result<ASAuthorization, Error>) -> Result<AppleSignInUser, AppleSignInError> {
         switch result {
         case .success(let authorization):
             guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
@@ -45,7 +51,11 @@ struct DefaultAppleSignInService: AppleSignInService {
                   let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
                 return .failure(.tokenError)
             }
-            return .success(idTokenString)
+            return .success(.init(token: idTokenString,
+                                  nonce: self.currentNonce,
+                                  email: appleIDCredential.email,
+                                  givenName: appleIDCredential.fullName?.givenName,
+                                  familyName: appleIDCredential.fullName?.familyName))
         case .failure:
             return .failure(.unknown)
         }
@@ -92,5 +102,18 @@ struct DefaultAppleSignInService: AppleSignInService {
         }.joined()
         
         return hashString
+    }
+}
+
+struct AppleSignInButton: View {
+    let onRequest: (ASAuthorizationAppleIDRequest) -> Void
+    let onCompletion: (Result<ASAuthorization, any Error>) -> Void
+    
+    var body: some View {
+        SignInWithAppleButton(.signIn) { request in
+            onRequest(request)
+        } onCompletion: { result in
+            onCompletion(result)
+        }
     }
 }
