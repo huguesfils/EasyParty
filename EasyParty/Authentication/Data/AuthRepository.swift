@@ -14,7 +14,7 @@ protocol AuthRepository {
     
     func loginWithApple(token: String, nonce: String, email: String, givenName: String?, familyName: String?) async -> Result<User, AuthError>
     
-//    func loginWithGoogle() async -> Result<User, AuthError>
+    func loginWithGoogle(idToken: String, accessToken: String) async -> Result<User, AuthError>
     
     func signOut() throws
     
@@ -22,6 +22,7 @@ protocol AuthRepository {
 }
 
 struct DefaultAuthRepository: AuthRepository {
+    
     let authService: FirebaseAuthService
     
     func loginWithEmail(email: String, password: String) async -> Result<User, AuthError> {
@@ -42,11 +43,11 @@ struct DefaultAuthRepository: AuthRepository {
             .mapError { $0.toDomain() }
     }
     
-//    func loginWithGoogle() async -> Result<User, AuthError> {
-//        return await authService.loginWithGoogle()
-//            .map { $0.toDomain() }
-//            .mapError { $0.toDomain() }
-//    }
+    func loginWithGoogle(idToken: String, accessToken: String) async -> Result<User, AuthError> {
+        return await authService.loginWithGoogle(idToken: idToken, accessToken: accessToken)
+            .map { $0.toDomain() }
+            .mapError { $0.toDomain() }
+    }
     
     func signOut() throws {
         return try authService.signOut()

@@ -14,13 +14,9 @@ import CryptoKit
 import AuthenticationServices
 
 protocol FirebaseAuthService {
-    func loginWithEmail(email: String, password: String) async -> Result<
-        FirebaseUser, FirebaseAuthError
-    >
+    func loginWithEmail(email: String, password: String) async -> Result<FirebaseUser, FirebaseAuthError>
     
-    func registerWithEmail(email: String, password: String, fullname: String) async -> Result<
-        FirebaseUser, FirebaseAuthError
-    >
+    func registerWithEmail(email: String, password: String, fullname: String) async -> Result<FirebaseUser, FirebaseAuthError>
     
     func loginWithApple(token: String, nonce: String, email: String, givenName: String?, familyName: String?) async -> Result<FirebaseUser, FirebaseAuthError>
     
@@ -90,20 +86,18 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
         
         do {
             let result = try await Auth.auth().signIn(with: credential)
-            let firebaseUser = result.user
-            print("User \(firebaseUser.uid) signed in with email \(firebaseUser.email ?? "unknown")")
-            
-            let userObject = User(
-                id: firebaseUser.uid,
-                fullname: "",
-                email: firebaseUser.email ?? "",
+            let user = User(
+                id: result.user.uid,
+                fullname: result.user.displayName ?? "",
+                email: result.user.email ?? "",
                 imageUrl: nil
             )
             
-            try await setUserData(user: userObject)
+            let id = result.user.uid
             
-            print("Données utilisateur Firestore créées/mises à jour avec succès.")
-            return await .success(try fetchUserData(firebaseUser.uid))
+            try await setUserData(user: user)
+            
+            return await .success(try fetchUserData(id))
         } catch {
             let authError = AuthErrorCode.Code(rawValue: (error as NSError).code)
             return .failure(FirebaseAuthError(authErrorCode: authError ?? .userNotFound))

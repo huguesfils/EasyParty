@@ -15,21 +15,30 @@ enum GoogleSignInError: Error {
     case unknow
 }
 
+struct GoogleSignInUser {
+    let idToken: String
+    let accessToken: String
+    let email: String?
+    let fullName: String?
+}
+
+
 protocol GoogleSignInService {
-    func signIn() async -> Result<(idToken: String, accessToken: String, profile: GIDProfileData?), GoogleSignInError>
+    func signIn() async -> Result<GoogleSignInUser, GoogleSignInError>
 }
 
 struct DefaultGoogleSignInService: GoogleSignInService {
-    func signIn() async -> Result<(idToken: String, accessToken: String, profile: GIDProfileData?), GoogleSignInError> {
+    @MainActor
+    func signIn() async -> Result<GoogleSignInUser, GoogleSignInError> {
         guard let clientID = FirebaseApp.app()?.options.clientID else {
             fatalError("No client ID found in Firebase configuration")
         }
         let config = GIDConfiguration(clientID: clientID)
         GIDSignIn.sharedInstance.configuration = config
         
-        guard let windowScene = await UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = await windowScene.windows.first,
-              let rootViewController = await window.rootViewController else {
+        guard let windowScene =  UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window =  windowScene.windows.first,
+              let rootViewController =  window.rootViewController else {
             print("There is no root view controller!")
             return .failure(.noRootViewController)
         }
@@ -43,7 +52,10 @@ struct DefaultGoogleSignInService: GoogleSignInService {
             let accessToken = userAuthentication.user.accessToken
             let profile = userAuthentication.user.profile
             
-            return .success((idToken.tokenString, accessToken.tokenString, profile))
+            return .success(.init(idToken: idToken.tokenString,
+                                  accessToken: accessToken.tokenString,
+                                  email: profile?.email,
+                                  fullName: profile?.name))
         } catch {
             return .failure(.unknow)
         }

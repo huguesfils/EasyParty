@@ -47,7 +47,9 @@ struct LoginView: View {
                 .cornerRadius(10)
             
             Button {
-                
+                Task {
+                    await viewModel.loginWithGoogle()
+                }
             } label: {
                 HStack(
                     alignment: /*@START_MENU_TOKEN@*/ .center /*@END_MENU_TOKEN@*/,
@@ -64,18 +66,18 @@ struct LoginView: View {
             .cornerRadius(10)
             .buttonStyle(.bordered)
             
-            //            NavigationLink(destination: MailLoginView()) {
-            //              Label("Continuer avec l'email", systemImage: "envelope")
-            //                .frame(maxWidth: .infinity)
-            //                .padding()
-            //                .foregroundColor(.black)
-            //                .background(Color.white)
-            //                .cornerRadius(10)
-            //            }
+//            NavigationLink(destination: MailLoginView()) {
+//                Label("Continuer avec l'email", systemImage: "envelope")
+//                    .frame(maxWidth: .infinity)
+//                    .padding()
+//                    .foregroundColor(.black)
+//                    .background(Color.white)
+//                    .cornerRadius(10)
+//            }
         }
     }
 }
 
 #Preview {
-    LoginView(viewModel: .init(loginWithAppleUseCase: AuthInjector.loginWithAppleUseCase(), buttonLoginInWithAppleUseCase: AuthInjector.buttonLoginInWithAppleUseCase()))
+    LoginView(viewModel: .init(loginWithAppleUseCase: AuthInjector.loginWithAppleUseCase(), buttonLoginInWithAppleUseCase: AuthInjector.buttonLoginInWithAppleUseCase(), loginWithGoogleUseCase: AuthInjector.loginWithGoogle(), getGoogleCredentialsUseCase: AuthInjector.getGoogleCredentialsUseCase()))
 }

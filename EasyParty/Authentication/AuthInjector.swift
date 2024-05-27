@@ -10,6 +10,7 @@ import Foundation
 struct AppInjector {
     static let shared = AppInjector()
     let appleService = DefaultAppleSignInService()
+    let googleService = DefaultGoogleSignInService()
 }
 
 struct AuthInjector {
@@ -27,5 +28,13 @@ struct AuthInjector {
     
     static func loginWithAppleUseCase() -> LoginWithAppleUseCase {
         return DefaultLoginWithAppleUseCase(repository: repository())
+    }
+    
+    static func getGoogleCredentialsUseCase() -> GetGoogleCredentialsUseCase {
+        return DefaultGetGoogleCredentialsUseCase(googleService: AppInjector.shared.googleService)
+    }
+    
+    static func loginWithGoogle() -> LoginWithGoogleUseCase {
+        return DafaultLoginWithGoogleUseCase(repository: repository())
     }
 }

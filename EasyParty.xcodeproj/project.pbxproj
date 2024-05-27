@@ -66,6 +66,7 @@
 		BBC178F12BFE45B800FE8FB7 /* CustomDateField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC178F02BFE45B800FE8FB7 /* CustomDateField.swift */; };
 		BBC178F32BFE45C000FE8FB7 /* CustomDisclosureGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC178F22BFE45BF00FE8FB7 /* CustomDisclosureGroup.swift */; };
 		BBC178F52BFE460900FE8FB7 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC178F42BFE460900FE8FB7 /* AuthError.swift */; };
+		BBF53F2D2C04D89500485B94 /* GetGoogleCredentialsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF53F2C2C04D89500485B94 /* GetGoogleCredentialsUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +141,7 @@
 		BBC178F02BFE45B800FE8FB7 /* CustomDateField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDateField.swift; sourceTree = "<group>"; };
 		BBC178F22BFE45BF00FE8FB7 /* CustomDisclosureGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDisclosureGroup.swift; sourceTree = "<group>"; };
 		BBC178F42BFE460900FE8FB7 /* AuthError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
+		BBF53F2C2C04D89500485B94 /* GetGoogleCredentialsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetGoogleCredentialsUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,6 +332,7 @@
 				BB375B142C01EA000015C117 /* LoginWithAppleUseCase.swift */,
 				BB8B0C2C2C039FEB00C1F7F1 /* ButtonLoginInWithAppleUseCase.swift */,
 				BB375B162C01EA4B0015C117 /* LoginWithGoogleUseCase.swift */,
+				BBF53F2C2C04D89500485B94 /* GetGoogleCredentialsUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -594,6 +597,7 @@
 				BB4246BE2C00ABFE004C11F2 /* DomainError.swift in Sources */,
 				BBC178EF2BFE45AE00FE8FB7 /* CustomFormField.swift in Sources */,
 				BB8B0C2D2C039FEB00C1F7F1 /* ButtonLoginInWithAppleUseCase.swift in Sources */,
+				BBF53F2D2C04D89500485B94 /* GetGoogleCredentialsUseCase.swift in Sources */,
 				BB4246C12C00AD1E004C11F2 /* FirebaseAuthError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
