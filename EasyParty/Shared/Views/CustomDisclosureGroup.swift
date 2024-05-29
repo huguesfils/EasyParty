@@ -19,7 +19,8 @@ struct CustomDisclosureGroup<Content: View>: View {
         withAnimation {
           isExpanded.toggle()
         }
-      }) {
+      })
+        {
         HStack {
           Image(systemName: icon)
             .foregroundStyle(.flamingo)
@@ -35,17 +36,19 @@ struct CustomDisclosureGroup<Content: View>: View {
         }
         .contentShape(Rectangle())
       }
-      .buttonStyle(PlainButtonStyle())
+//      .buttonStyle(PlainButtonStyle())
 
       .padding()
       .background(.white.opacity(0.5))
       .cornerRadius(10)
 
       if isExpanded {
-        content()
-          .padding(.leading)
-          .transition(.opacity.combined(with: .move(edge: .top)))
+          withAnimation{
+              content()
+                .padding(.leading)
+                .transition(.opacity.combined(with: .move(edge: .top)))
+          }
       }
-    }
+    }.buttonStyle(PlainButtonStyle())
   }
 }

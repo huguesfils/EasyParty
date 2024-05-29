@@ -35,6 +35,10 @@ struct AuthInjector {
     }
     
     static func loginWithGoogle() -> LoginWithGoogleUseCase {
-        return DafaultLoginWithGoogleUseCase(repository: repository())
+        return DefaultLoginWithGoogleUseCase(repository: repository())
+    }
+    
+    static func signOut() -> SignOutUseCase {
+        return DefaultSignOutUseCase(repository: repository())
     }
 }

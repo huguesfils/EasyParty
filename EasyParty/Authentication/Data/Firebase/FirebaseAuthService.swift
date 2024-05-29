@@ -109,16 +109,22 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
     }
     
     private func fetchUserData(_ id: String) async throws -> FirebaseUser {
-        let documentSnapshot = try await Firestore.firestore().collection("users").document(id)
-            .getDocument()
-        return try documentSnapshot.data(as: FirebaseUser.self)
-    }
+           let documentSnapshot = try await Firestore.firestore().collection("users").document(id).getDocument()
+
+           if let data = documentSnapshot.data() {
+               print("User data fetched: \(data)") // Log user data
+           } else {
+               print("No user data found for id: \(id)") // Log if no data found
+           }
+
+           return try documentSnapshot.data(as: FirebaseUser.self)
+       }
     
     private func setUserData(user: User) async throws {
         guard let encodedUser = try? Firestore.Encoder().encode(user) else {
             throw FirebaseAuthError.unknown
         }
-        try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
+        try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser, merge: true)
     }
 }
 // TODO: finir les funcs

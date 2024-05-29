@@ -19,4 +19,3 @@ struct DefaultButtonLoginInWithAppleUseCase: ButtonLoginInWithAppleUseCase {
         return appleSignInService.signInButton(completion)
     }
 }
-
