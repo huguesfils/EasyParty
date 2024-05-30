@@ -19,16 +19,19 @@ struct DefaultLoginWithAppleUseCase: LoginWithAppleUseCase {
         let result = await repository.loginWithApple(token: token, nonce: nonce, email: email, givenName: givenName, familyName: familyName)
         switch result {
         case .success(let user):
-            saveUserInfo(email: user.email, fullName: user.fullname)
+            do {
+                try saveUserInfo(user)
+            } catch {
+                return .failure(.unknown)
+            }
             return .success(user)
         case .failure(let error):
             return .failure(error)
         }
     }
 
-    private func saveUserInfo(email: String?, fullName: String?) {
-        UserDefaults.standard.set(email, forKey: "userEmail")
-        UserDefaults.standard.set(fullName, forKey: "fullName")
-        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+    private func saveUserInfo(_ user: User) throws {
+        let data = try JSONEncoder().encode(user)
+        UserDefaults.standard.set(data, forKey: "currentUser")
     }
 }

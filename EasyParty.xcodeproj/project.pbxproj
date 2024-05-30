@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB1DD7F22C087FD5004E5CAC /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1DD7F12C087FD5004E5CAC /* SettingsViewModel.swift */; };
 		BB2392F12BFF80F000F59F68 /* AppleSignInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2392F02BFF80F000F59F68 /* AppleSignInService.swift */; };
 		BB375B112C01E8C50015C117 /* LoginWithEmailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB375B102C01E8C50015C117 /* LoginWithEmailUseCase.swift */; };
 		BB375B132C01E99D0015C117 /* RegisterWithEmailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB375B122C01E99D0015C117 /* RegisterWithEmailUseCase.swift */; };
@@ -92,6 +93,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB1DD7F12C087FD5004E5CAC /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		BB2392F02BFF80F000F59F68 /* AppleSignInService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInService.swift; sourceTree = "<group>"; };
 		BB2392F22BFFA33F00F59F68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BB2392F32BFFA37A00F59F68 /* EasyParty.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EasyParty.entitlements; sourceTree = "<group>"; };
@@ -189,6 +191,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB1DD7F32C08804E004E5CAC /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				BB1DD7F12C087FD5004E5CAC /* SettingsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		BB375B1A2C020C960015C117 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +238,7 @@
 		BB60E6332C07661000D77BD4 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				BB1DD7F32C08804E004E5CAC /* ViewModels */,
 				BB60E6342C07661C00D77BD4 /* Views */,
 			);
 			path = Settings;
@@ -639,6 +650,7 @@
 				BB8B0C2F2C03A3AF00C1F7F1 /* AuthInjector.swift in Sources */,
 				BBA3CAD12C078C4C00C5B21D /* SignOutUseCase.swift in Sources */,
 				BB375B112C01E8C50015C117 /* LoginWithEmailUseCase.swift in Sources */,
+				BB1DD7F22C087FD5004E5CAC /* SettingsViewModel.swift in Sources */,
 				BB4246BC2C00AB8C004C11F2 /* AuthRepository.swift in Sources */,
 				BB60E6372C07665000D77BD4 /* SettingsView.swift in Sources */,
 				BB2392F12BFF80F000F59F68 /* AppleSignInService.swift in Sources */,

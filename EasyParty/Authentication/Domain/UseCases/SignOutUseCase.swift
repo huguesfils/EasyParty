@@ -21,8 +21,6 @@ struct DefaultSignOutUseCase: SignOutUseCase {
     }
     
     private func clearUserInfo() {
-            UserDefaults.standard.removeObject(forKey: "userEmail")
-            UserDefaults.standard.removeObject(forKey: "fullName")
-            UserDefaults.standard.removeObject(forKey: "isLoggedIn")
+            UserDefaults.standard.removeObject(forKey: "currentUser")
         }
 }

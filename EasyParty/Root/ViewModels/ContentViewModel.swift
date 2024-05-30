@@ -11,7 +11,7 @@ final class ContentViewModel: ObservableObject {
     @Published var isLoggedIn: Bool = false
     
     init() {
-        self.isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
+        self.isLoggedIn = (UserDefaults.standard.object(forKey: "currentUser") != nil)
         NotificationCenter.default.addObserver(self, selector: #selector(currentUserDidLogIn), name: .currentUserDidLogIn, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(currentUserDidLogOut), name: .currentUserDidLogOut, object: nil)
     }

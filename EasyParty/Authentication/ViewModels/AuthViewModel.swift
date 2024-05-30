@@ -12,30 +12,23 @@ protocol AuthenticationFormProtocol {
 }
 
 final class AuthViewModel: ObservableObject {
-    @Published var email: String?
-    @Published var fullName: String?
+   
     
     let loginWithAppleUseCase: LoginWithAppleUseCase
     let buttonLoginInWithAppleUseCase: ButtonLoginInWithAppleUseCase
     let loginWithGoogleUseCase: LoginWithGoogleUseCase
     let getGoogleCredentialsUseCase: GetGoogleCredentialsUseCase
-    let signOutUseCase: SignOutUseCase
+    
     
     @Published var isLoading = false
     @Published var hasError: Error? = nil
     
-    init(loginWithAppleUseCase: LoginWithAppleUseCase, buttonLoginInWithAppleUseCase: ButtonLoginInWithAppleUseCase, loginWithGoogleUseCase: LoginWithGoogleUseCase, getGoogleCredentialsUseCase: GetGoogleCredentialsUseCase,  signOutUseCase: SignOutUseCase
+    init(loginWithAppleUseCase: LoginWithAppleUseCase, buttonLoginInWithAppleUseCase: ButtonLoginInWithAppleUseCase, loginWithGoogleUseCase: LoginWithGoogleUseCase, getGoogleCredentialsUseCase: GetGoogleCredentialsUseCase
     ) {
         self.loginWithAppleUseCase = loginWithAppleUseCase
         self.buttonLoginInWithAppleUseCase = buttonLoginInWithAppleUseCase
         self.loginWithGoogleUseCase = loginWithGoogleUseCase
         self.getGoogleCredentialsUseCase = getGoogleCredentialsUseCase
-        self.signOutUseCase = signOutUseCase
-    }
-    
-    func loadUserInfo() {
-        self.email = UserDefaults.standard.string(forKey: "userEmail")
-        self.fullName = UserDefaults.standard.string(forKey: "fullName")
     }
     
     @ViewBuilder
@@ -67,14 +60,7 @@ final class AuthViewModel: ObservableObject {
         }
     }
     
-    func signOut() {
-        do {
-        try signOutUseCase.execute()
-            NotificationCenter.default.post(name: .currentUserDidLogOut, object: nil, userInfo: nil)
-        } catch {
-            print("Error signing out: \(error.localizedDescription)")
-        }
-    }
+   
     
     // MARK: - Private func
     @MainActor

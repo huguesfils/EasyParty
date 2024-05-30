@@ -66,15 +66,23 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
         
         do {
             let result = try await Auth.auth().signIn(with: credential)
-            let formattedFullName = [givenName, familyName].compactMap { $0 }
-                .joined(separator: " ")
-            
-            let user = User(id: result.user.uid, fullname: formattedFullName, email: email)
             let id = result.user.uid
             
-            try await setUserData(user: user)
+            do {
+                let user = try await fetchUserData(id)
+
+                return .success(user)
+            } catch {
+                let formattedFullName = [givenName, familyName].compactMap { $0 }
+                    .joined(separator: " ")
+                
+                let user = User(id: result.user.uid, fullname: formattedFullName, email: email)
+                
+                try await setUserData(user: user)
             
-            return await .success(try fetchUserData(id))
+                return await .success(try fetchUserData(id))
+            }
+           
         } catch {
             let authError = AuthErrorCode.Code(rawValue: (error as NSError).code)
             return .failure(FirebaseAuthError(authErrorCode: authError ?? .userNotFound))
@@ -112,9 +120,9 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
            let documentSnapshot = try await Firestore.firestore().collection("users").document(id).getDocument()
 
            if let data = documentSnapshot.data() {
-               print("User data fetched: \(data)") // Log user data
+               print("User data fetched: \(data)")
            } else {
-               print("No user data found for id: \(id)") // Log if no data found
+               print("No user data found for id: \(id)")
            }
 
            return try documentSnapshot.data(as: FirebaseUser.self)

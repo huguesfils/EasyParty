@@ -9,7 +9,7 @@ import PhotosUI
 import SwiftUI
 
 struct SettingsView: View {
-  @ObservedObject var viewModel: AuthViewModel
+  @ObservedObject var viewModel: SettingsViewModel
   @State private var showingDeleteAlert = false
   @Environment(\.dismiss) var dismiss
 
@@ -125,5 +125,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(viewModel: .init(loginWithAppleUseCase: AuthInjector.loginWithAppleUseCase(), buttonLoginInWithAppleUseCase: AuthInjector.buttonLoginInWithAppleUseCase(), loginWithGoogleUseCase: AuthInjector.loginWithGoogle(), getGoogleCredentialsUseCase: AuthInjector.getGoogleCredentialsUseCase(), signOutUseCase: AuthInjector.signOut()))
+    SettingsView(viewModel: SettingsViewModel(signOutUseCase: AuthInjector.signOut()))
 }
