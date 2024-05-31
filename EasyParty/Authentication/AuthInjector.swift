@@ -22,6 +22,14 @@ struct AuthInjector {
         return DefaultAuthRepository(authService: service())
     }
     
+    static func loginWithEmailUseCase() -> LoginWithEmailUseCase {
+        return DefaultLoginWithEmailUseCase(repository: repository())
+    }
+    
+    static func registerWithEmailUseCase() -> RegisterWithEmailUseCase {
+        return DefaultRegisterWithEmailUseCase(repository: repository())
+    }
+    
     static func buttonLoginInWithAppleUseCase() -> ButtonLoginInWithAppleUseCase {
         return DefaultButtonLoginInWithAppleUseCase(appleSignInService: AppInjector.shared.appleService)
     }
@@ -36,6 +44,10 @@ struct AuthInjector {
     
     static func loginWithGoogle() -> LoginWithGoogleUseCase {
         return DefaultLoginWithGoogleUseCase(repository: repository())
+    }
+    
+    static func resetPasswordUseCase() -> ResetPasswordUseCase {
+        return DefaultResetPasswordUseCase(repository: repository())
     }
     
     static func signOut() -> SignOutUseCase {

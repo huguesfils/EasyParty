@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB1006652C0A061C006BAE6D /* MailLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1006642C0A061C006BAE6D /* MailLoginView.swift */; };
+		BB1006682C0A062B006BAE6D /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1006662C0A062B006BAE6D /* ResetPasswordView.swift */; };
+		BB1006692C0A062B006BAE6D /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1006672C0A062B006BAE6D /* RegisterView.swift */; };
+		BB10066B2C0A1BC2006BAE6D /* ResetPasswordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB10066A2C0A1BC2006BAE6D /* ResetPasswordUseCase.swift */; };
 		BB1DD7F22C087FD5004E5CAC /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1DD7F12C087FD5004E5CAC /* SettingsViewModel.swift */; };
 		BB2392F12BFF80F000F59F68 /* AppleSignInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2392F02BFF80F000F59F68 /* AppleSignInService.swift */; };
 		BB375B112C01E8C50015C117 /* LoginWithEmailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB375B102C01E8C50015C117 /* LoginWithEmailUseCase.swift */; };
@@ -93,6 +97,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB1006642C0A061C006BAE6D /* MailLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailLoginView.swift; sourceTree = "<group>"; };
+		BB1006662C0A062B006BAE6D /* ResetPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		BB1006672C0A062B006BAE6D /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		BB10066A2C0A1BC2006BAE6D /* ResetPasswordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordUseCase.swift; sourceTree = "<group>"; };
 		BB1DD7F12C087FD5004E5CAC /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		BB2392F02BFF80F000F59F68 /* AppleSignInService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInService.swift; sourceTree = "<group>"; };
 		BB2392F22BFFA33F00F59F68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -349,6 +357,9 @@
 			isa = PBXGroup;
 			children = (
 				BBC178B32BFE445600FE8FB7 /* LoginView.swift */,
+				BB1006642C0A061C006BAE6D /* MailLoginView.swift */,
+				BB1006672C0A062B006BAE6D /* RegisterView.swift */,
+				BB1006662C0A062B006BAE6D /* ResetPasswordView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -391,6 +402,7 @@
 				BB375B162C01EA4B0015C117 /* LoginWithGoogleUseCase.swift */,
 				BBF53F2C2C04D89500485B94 /* GetGoogleCredentialsUseCase.swift */,
 				BBA3CAD02C078C4C00C5B21D /* SignOutUseCase.swift */,
+				BB10066A2C0A1BC2006BAE6D /* ResetPasswordUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -637,6 +649,7 @@
 				BB60E62F2C075C1400D77BD4 /* TabBarView.swift in Sources */,
 				BBC178B72BFE445600FE8FB7 /* LoginView.swift in Sources */,
 				BB375B192C020C900015C117 /* GoogleSignInService.swift in Sources */,
+				BB1006652C0A061C006BAE6D /* MailLoginView.swift in Sources */,
 				BB4246C32C00AD36004C11F2 /* FirebaseUser.swift in Sources */,
 				BBC178592BFE210800FE8FB7 /* EasyPartyApp.swift in Sources */,
 				BBC178F52BFE460900FE8FB7 /* AuthError.swift in Sources */,
@@ -649,14 +662,17 @@
 				BB60E6302C075C1400D77BD4 /* ContentView.swift in Sources */,
 				BB8B0C2F2C03A3AF00C1F7F1 /* AuthInjector.swift in Sources */,
 				BBA3CAD12C078C4C00C5B21D /* SignOutUseCase.swift in Sources */,
+				BB1006682C0A062B006BAE6D /* ResetPasswordView.swift in Sources */,
 				BB375B112C01E8C50015C117 /* LoginWithEmailUseCase.swift in Sources */,
 				BB1DD7F22C087FD5004E5CAC /* SettingsViewModel.swift in Sources */,
 				BB4246BC2C00AB8C004C11F2 /* AuthRepository.swift in Sources */,
 				BB60E6372C07665000D77BD4 /* SettingsView.swift in Sources */,
 				BB2392F12BFF80F000F59F68 /* AppleSignInService.swift in Sources */,
 				BBC178F12BFE45B800FE8FB7 /* CustomDateField.swift in Sources */,
+				BB1006692C0A062B006BAE6D /* RegisterView.swift in Sources */,
 				BBC178AC2BFE2E1400FE8FB7 /* User.swift in Sources */,
 				BB375B152C01EA000015C117 /* LoginWithAppleUseCase.swift in Sources */,
+				BB10066B2C0A1BC2006BAE6D /* ResetPasswordUseCase.swift in Sources */,
 				BB4246BE2C00ABFE004C11F2 /* DomainError.swift in Sources */,
 				BB60E6322C07609000D77BD4 /* ContentViewModel.swift in Sources */,
 				BBC178EF2BFE45AE00FE8FB7 /* CustomFormField.swift in Sources */,

@@ -13,22 +13,30 @@ protocol AuthenticationFormProtocol {
 
 final class AuthViewModel: ObservableObject {
    
-    
+    let loginWithEmailUseCase: LoginWithEmailUseCase
+    let registerWithEmailUseCase: RegisterWithEmailUseCase
     let loginWithAppleUseCase: LoginWithAppleUseCase
     let buttonLoginInWithAppleUseCase: ButtonLoginInWithAppleUseCase
     let loginWithGoogleUseCase: LoginWithGoogleUseCase
     let getGoogleCredentialsUseCase: GetGoogleCredentialsUseCase
+    let resetPAsswordUseCase: ResetPasswordUseCase
     
-    
+    @Published var email: String = ""
+    @Published var password: String = ""
+    @Published var confirmPassword: String = ""
+    @Published var fullname: String = ""
     @Published var isLoading = false
     @Published var hasError: Error? = nil
-    
-    init(loginWithAppleUseCase: LoginWithAppleUseCase, buttonLoginInWithAppleUseCase: ButtonLoginInWithAppleUseCase, loginWithGoogleUseCase: LoginWithGoogleUseCase, getGoogleCredentialsUseCase: GetGoogleCredentialsUseCase
-    ) {
+    @Published var showAlert: Bool = false
+
+    init(loginWithEmailUseCase: LoginWithEmailUseCase, registerWithEmailUseCase: RegisterWithEmailUseCase, loginWithAppleUseCase: LoginWithAppleUseCase, buttonLoginInWithAppleUseCase: ButtonLoginInWithAppleUseCase, loginWithGoogleUseCase: LoginWithGoogleUseCase, getGoogleCredentialsUseCase: GetGoogleCredentialsUseCase, resetPasswordUseCase: ResetPasswordUseCase) {
+        self.loginWithEmailUseCase = loginWithEmailUseCase
+        self.registerWithEmailUseCase = registerWithEmailUseCase
         self.loginWithAppleUseCase = loginWithAppleUseCase
         self.buttonLoginInWithAppleUseCase = buttonLoginInWithAppleUseCase
         self.loginWithGoogleUseCase = loginWithGoogleUseCase
         self.getGoogleCredentialsUseCase = getGoogleCredentialsUseCase
+        self.resetPAsswordUseCase = resetPasswordUseCase
     }
     
     @ViewBuilder
@@ -57,6 +65,49 @@ final class AuthViewModel: ObservableObject {
             await loginWithGoogle(user: user)
         case .failure(let failure):
             hasError = failure
+        }
+    }
+    
+    
+    @MainActor
+    func signInWithEmailPassword() async {
+        isLoading = true
+        let result = await loginWithEmailUseCase.execute(email: email, password: password)
+        isLoading = false
+        switch result {
+        case .success(_):
+            NotificationCenter.default.post(name: .currentUserDidLogIn, object: nil, userInfo: nil)
+        case .failure(let failure):
+            self.hasError = failure
+            showAlert = true
+        }
+    }
+    
+    @MainActor
+    func registerWithEmailPassword() async {
+        isLoading = true
+        let result = await registerWithEmailUseCase.execute(email: email, password: password, fullname: fullname)
+        isLoading = false
+        switch result {
+        case .success(_):
+            NotificationCenter.default.post(name: .currentUserDidLogIn, object: nil, userInfo: nil)
+        case .failure(let failure):
+            self.hasError = failure
+            showAlert = true
+        }
+    }
+    
+    @MainActor
+    func resetPassword() async {
+        isLoading = true
+        let result = await resetPAsswordUseCase.execute(email: email)
+        isLoading = false
+        switch result {
+        case .success(_):
+            print("Password reset link sent successfully")
+        case .failure(let failure):
+            self.hasError = failure
+            showAlert = true
         }
     }
     

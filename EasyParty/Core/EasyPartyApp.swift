@@ -29,6 +29,7 @@ struct EasyPartyApp: App {
     var body: some Scene {
         WindowGroup { 
             ContentView(viewModel: ContentViewModel())
+            .environment(\.colorScheme, .light)
         }
     }
 }

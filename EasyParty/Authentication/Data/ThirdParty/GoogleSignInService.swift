@@ -22,7 +22,6 @@ struct GoogleSignInUser {
     let fullName: String?
 }
 
-
 protocol GoogleSignInService {
     func signIn() async -> Result<GoogleSignInUser, GoogleSignInError>
 }

@@ -16,6 +16,8 @@ protocol AuthRepository {
     
     func loginWithGoogle(idToken: String, accessToken: String) async -> Result<User, AuthError>
     
+    func resetPassword(toEmail email: String) async -> Result<Void, AuthError>
+    
     func signOut() throws
     
 //    func fetchUserData(_ id: String) async throws -> User
@@ -46,6 +48,11 @@ struct DefaultAuthRepository: AuthRepository {
     func loginWithGoogle(idToken: String, accessToken: String) async -> Result<User, AuthError> {
         return await authService.loginWithGoogle(idToken: idToken, accessToken: accessToken)
             .map { $0.toDomain() }
+            .mapError { $0.toDomain() }
+    }
+    
+    func resetPassword(toEmail email: String) async -> Result<Void, AuthError> {
+        return await authService.resetPassword(toEmail: email)
             .mapError { $0.toDomain() }
     }
     

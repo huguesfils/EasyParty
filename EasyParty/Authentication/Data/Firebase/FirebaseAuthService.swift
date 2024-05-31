@@ -24,6 +24,8 @@ protocol FirebaseAuthService {
         FirebaseUser, FirebaseAuthError
     >
     
+    func resetPassword(toEmail email: String) async -> Result<Void, FirebaseAuthError>
+    
     func signOut() throws
     
 }
@@ -94,18 +96,37 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
         
         do {
             let result = try await Auth.auth().signIn(with: credential)
-            let user = User(
-                id: result.user.uid,
-                fullname: result.user.displayName ?? "",
-                email: result.user.email ?? "",
-                imageUrl: nil
-            )
-            
             let id = result.user.uid
             
-            try await setUserData(user: user)
-            
-            return await .success(try fetchUserData(id))
+            do {
+                let user = try await fetchUserData(id)
+
+                return .success(user)
+            } catch {
+                let result = try await Auth.auth().signIn(with: credential)
+                let user = User(
+                    id: result.user.uid,
+                    fullname: result.user.displayName ?? "",
+                    email: result.user.email ?? "",
+                    imageUrl: nil
+                )
+                
+                let id = result.user.uid
+                
+                try await setUserData(user: user)
+                
+                return await .success(try fetchUserData(id))
+            }
+        } catch {
+            let authError = AuthErrorCode.Code(rawValue: (error as NSError).code)
+            return .failure(FirebaseAuthError(authErrorCode: authError ?? .userNotFound))
+        }
+    }
+    
+    func resetPassword(toEmail email: String) async -> Result<Void, FirebaseAuthError>{
+        do {
+            let result: Void = try await Auth.auth().sendPasswordReset(withEmail: email)
+            return .success(result)
         } catch {
             let authError = AuthErrorCode.Code(rawValue: (error as NSError).code)
             return .failure(FirebaseAuthError(authErrorCode: authError ?? .userNotFound))
