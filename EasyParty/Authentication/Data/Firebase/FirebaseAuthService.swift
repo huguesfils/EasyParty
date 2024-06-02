@@ -20,13 +20,13 @@ protocol FirebaseAuthService {
     
     func loginWithApple(token: String, nonce: String, email: String, givenName: String?, familyName: String?) async -> Result<FirebaseUser, FirebaseAuthError>
     
-    func loginWithGoogle(idToken: String, accessToken: String) async -> Result<
-        FirebaseUser, FirebaseAuthError
-    >
+    func loginWithGoogle(idToken: String, accessToken: String) async -> Result<FirebaseUser, FirebaseAuthError>
     
     func resetPassword(toEmail email: String) async -> Result<Void, FirebaseAuthError>
     
     func signOut() throws
+    
+    func deleteAccount() async -> Result<Void, FirebaseAuthError>
     
 }
 
@@ -72,7 +72,7 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
             
             do {
                 let user = try await fetchUserData(id)
-
+                
                 return .success(user)
             } catch {
                 let formattedFullName = [givenName, familyName].compactMap { $0 }
@@ -81,10 +81,10 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
                 let user = User(id: result.user.uid, fullname: formattedFullName, email: email)
                 
                 try await setUserData(user: user)
-            
+                
                 return await .success(try fetchUserData(id))
             }
-           
+            
         } catch {
             let authError = AuthErrorCode.Code(rawValue: (error as NSError).code)
             return .failure(FirebaseAuthError(authErrorCode: authError ?? .userNotFound))
@@ -100,7 +100,7 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
             
             do {
                 let user = try await fetchUserData(id)
-
+                
                 return .success(user)
             } catch {
                 let result = try await Auth.auth().signIn(with: credential)
@@ -137,17 +137,48 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
         try Auth.auth().signOut()
     }
     
+    func deleteAccount() async -> Result<Void, FirebaseAuthError> {
+            guard let user = Auth.auth().currentUser else {
+                return .failure(FirebaseAuthError(authErrorCode: .userNotFound))
+            }
+            guard let lastSignInDate = user.metadata.lastSignInDate else {
+                return .failure(FirebaseAuthError(authErrorCode: .userNotFound))
+            }
+
+            let needsReauth = !lastSignInDate.isWithinPast(minutes: 5)
+
+            do {
+                if needsReauth {
+                    // Here, handle reauthentication if necessary
+                    // For simplicity, we assume user can reauthenticate with saved credentials
+                    guard let email = user.email else {
+                        return .failure(FirebaseAuthError(authErrorCode: .userNotFound))
+                    }
+                    let credential = EmailAuthProvider.credential(withEmail: email, password: "user_password")
+                    try await user.reauthenticate(with: credential)
+                }
+
+                deleteUserData(user.uid)
+                
+                try await user.delete()
+                return .success(())
+            } catch {
+                let authError = AuthErrorCode.Code(rawValue: (error as NSError).code)
+                return .failure(FirebaseAuthError(authErrorCode: authError ?? .userNotFound))
+            }
+        }
+    
     private func fetchUserData(_ id: String) async throws -> FirebaseUser {
-           let documentSnapshot = try await Firestore.firestore().collection("users").document(id).getDocument()
-
-           if let data = documentSnapshot.data() {
-               print("User data fetched: \(data)")
-           } else {
-               print("No user data found for id: \(id)")
-           }
-
-           return try documentSnapshot.data(as: FirebaseUser.self)
-       }
+        let documentSnapshot = try await Firestore.firestore().collection("users").document(id).getDocument()
+        
+        if let data = documentSnapshot.data() {
+            print("User data fetched: \(data)")
+        } else {
+            print("No user data found for id: \(id)")
+        }
+        
+        return try documentSnapshot.data(as: FirebaseUser.self)
+    }
     
     private func setUserData(user: User) async throws {
         guard let encodedUser = try? Firestore.Encoder().encode(user) else {
@@ -155,12 +186,23 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
         }
         try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser, merge: true)
     }
+    
+    func deleteUserData(_ id: String) {
+        Firestore.firestore().collection("users").document(id).delete { err in
+            if let err = err {
+                print("Erreur lors de la suppression des données utilisateur Firestore : \(err)")
+            } else {
+                print("Données utilisateur Firestore supprimées avec succès.")
+            }
+        }
+    }
 }
-// TODO: finir les funcs
-// repository AuthRepository -> appelle le service
-// transformer le Firebas Error en AuthError
-// faire les useCase
-// clean le viewmodel
-// appel dans les vues
-// créer un fichier traduction
-//
+
+extension Date {
+    func isWithinPast(minutes: Int) -> Bool {
+        let now = Date()
+        let timeAgo = now.addingTimeInterval(-1 * TimeInterval(60 * minutes))
+        let range = timeAgo...now
+        return range.contains(self)
+    }
+}

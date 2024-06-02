@@ -12,7 +12,7 @@ struct ContentView: View {
     
     var body: some View {
         if viewModel.isLoggedIn {
-            SettingsView(viewModel: SettingsViewModel(signOutUseCase: AuthInjector.signOut()))
+            SettingsView(viewModel: SettingsViewModel(signOutUseCase: AuthInjector.signOut(), deleteAccountUseCase: AuthInjector.deleteAccountUseCase()))
         } else {
             LoginView(viewModel: .init(loginWithEmailUseCase: AuthInjector.loginWithEmailUseCase(), registerWithEmailUseCase: AuthInjector.registerWithEmailUseCase(), loginWithAppleUseCase: AuthInjector.loginWithAppleUseCase(), buttonLoginInWithAppleUseCase: AuthInjector.buttonLoginInWithAppleUseCase(), loginWithGoogleUseCase: AuthInjector.loginWithGoogle(), getGoogleCredentialsUseCase: AuthInjector.getGoogleCredentialsUseCase(), resetPasswordUseCase: AuthInjector.resetPasswordUseCase()))
         }

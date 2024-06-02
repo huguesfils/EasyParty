@@ -20,7 +20,7 @@ protocol AuthRepository {
     
     func signOut() throws
     
-//    func fetchUserData(_ id: String) async throws -> User
+    func deleteAccount() async -> Result<Void, AuthError>
 }
 
 struct DefaultAuthRepository: AuthRepository {
@@ -60,12 +60,10 @@ struct DefaultAuthRepository: AuthRepository {
         return try authService.signOut()
     }
     
-    
-//    func fetchUserData(_ id: String) async throws -> User {
-//        return await authService.fetchUserData(id)
-//            .map { $0.toDomain() }
-//            .mapError { $0.toDomain() }
-//    }
+    func deleteAccount() async -> Result<Void, AuthError> {
+        return await authService.deleteAccount()
+            .mapError { $0.toDomain() }
+    }
 }
 
 

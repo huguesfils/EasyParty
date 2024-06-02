@@ -8,14 +8,15 @@
 import Foundation
 
 final class SettingsViewModel: ObservableObject {
-    
     let signOutUseCase: SignOutUseCase
+    let deleteAccountUseCase: DeleteAccountUseCase
     
     @Published var email: String?
     @Published var fullName: String?
     
-    init(signOutUseCase: SignOutUseCase, email: String? = nil, fullName: String? = nil) {
+    init(signOutUseCase: SignOutUseCase, deleteAccountUseCase: DeleteAccountUseCase, email: String? = nil, fullName: String? = nil) {
         self.signOutUseCase = signOutUseCase
+        self.deleteAccountUseCase = deleteAccountUseCase
         self.email = email
         self.fullName = fullName
     }
@@ -29,10 +30,23 @@ final class SettingsViewModel: ObservableObject {
     
     func signOut() {
         do {
-        try signOutUseCase.execute()
+            try signOutUseCase.execute()
             NotificationCenter.default.post(name: .currentUserDidLogOut, object: nil, userInfo: nil)
         } catch {
             print("Error signing out: \(error.localizedDescription)")
+        }
+    }
+    
+    @MainActor
+    func deleteAccount() {
+        Task {
+            let result = await deleteAccountUseCase.execute()
+            switch result {
+            case .success:
+                NotificationCenter.default.post(name: .currentUserDidLogOut, object: nil, userInfo: nil)
+            case .failure(let error):
+                print("Error deleting account: \(error.localizedDescription)")
+            }
         }
     }
 }

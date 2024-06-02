@@ -53,4 +53,8 @@ struct AuthInjector {
     static func signOut() -> SignOutUseCase {
         return DefaultSignOutUseCase(repository: repository())
     }
+    
+    static func deleteAccountUseCase() -> DeleteAccountUseCase {
+        return DefaultDeleteAccountUseCase(repository: repository())
+    }
 }

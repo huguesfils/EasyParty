@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB0EA6F92C0CBAF300C6A422 /* DeleteAccountUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0EA6F82C0CBAF300C6A422 /* DeleteAccountUseCase.swift */; };
 		BB1006652C0A061C006BAE6D /* MailLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1006642C0A061C006BAE6D /* MailLoginView.swift */; };
 		BB1006682C0A062B006BAE6D /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1006662C0A062B006BAE6D /* ResetPasswordView.swift */; };
 		BB1006692C0A062B006BAE6D /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1006672C0A062B006BAE6D /* RegisterView.swift */; };
@@ -97,6 +98,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB0EA6F82C0CBAF300C6A422 /* DeleteAccountUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountUseCase.swift; sourceTree = "<group>"; };
 		BB1006642C0A061C006BAE6D /* MailLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailLoginView.swift; sourceTree = "<group>"; };
 		BB1006662C0A062B006BAE6D /* ResetPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		BB1006672C0A062B006BAE6D /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 				BBF53F2C2C04D89500485B94 /* GetGoogleCredentialsUseCase.swift */,
 				BBA3CAD02C078C4C00C5B21D /* SignOutUseCase.swift */,
 				BB10066A2C0A1BC2006BAE6D /* ResetPasswordUseCase.swift */,
+				BB0EA6F82C0CBAF300C6A422 /* DeleteAccountUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -662,6 +665,7 @@
 				BB60E6302C075C1400D77BD4 /* ContentView.swift in Sources */,
 				BB8B0C2F2C03A3AF00C1F7F1 /* AuthInjector.swift in Sources */,
 				BBA3CAD12C078C4C00C5B21D /* SignOutUseCase.swift in Sources */,
+				BB0EA6F92C0CBAF300C6A422 /* DeleteAccountUseCase.swift in Sources */,
 				BB1006682C0A062B006BAE6D /* ResetPasswordView.swift in Sources */,
 				BB375B112C01E8C50015C117 /* LoginWithEmailUseCase.swift in Sources */,
 				BB1DD7F22C087FD5004E5CAC /* SettingsViewModel.swift in Sources */,
