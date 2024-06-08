@@ -141,22 +141,39 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
             guard let user = Auth.auth().currentUser else {
                 return .failure(FirebaseAuthError(authErrorCode: .userNotFound))
             }
-            guard let lastSignInDate = user.metadata.lastSignInDate else {
+            do {
+                deleteUserData(user.uid)
+                try await user.delete()
+                return .success(())
+            } catch {
+                let authError = AuthErrorCode.Code(rawValue: (error as NSError).code)
+                return .failure(FirebaseAuthError(authErrorCode: authError ?? .userNotFound))
+            }
+        }
+    
+    func deleteAppleAccount(_ token: String) async -> Result<Void, FirebaseAuthError> {
+            guard let user = Auth.auth().currentUser else {
                 return .failure(FirebaseAuthError(authErrorCode: .userNotFound))
             }
+            let needsTokenRevocation = user.providerData.contains { $0.providerID == "apple.com" }
+//            guard let lastSignInDate = user.metadata.lastSignInDate else {
+//                return .failure(FirebaseAuthError(authErrorCode: .userNotFound))
+//            }
 
-            let needsReauth = !lastSignInDate.isWithinPast(minutes: 5)
+//            let needsReauth = !lastSignInDate.isWithinPast(minutes: 5)
 
             do {
-                if needsReauth {
-                    // Here, handle reauthentication if necessary
-                    // For simplicity, we assume user can reauthenticate with saved credentials
-                    guard let email = user.email else {
-                        return .failure(FirebaseAuthError(authErrorCode: .userNotFound))
-                    }
-                    let credential = EmailAuthProvider.credential(withEmail: email, password: "user_password")
-                    try await user.reauthenticate(with: credential)
+                if needsTokenRevocation {
+                 
+                    try await Auth.auth().revokeToken(withAuthorizationCode: user.getIDToken())
                 }
+//                if needsReauth {
+//                    guard let email = user.email else {
+//                        return .failure(FirebaseAuthError(authErrorCode: .userNotFound))
+//                    }
+//                    let credential = EmailAuthProvider.credential(withEmail: email, password: "user_password")
+//                    try await user.reauthenticate(with: credential)
+//                }
 
                 deleteUserData(user.uid)
                 
