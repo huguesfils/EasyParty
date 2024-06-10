@@ -23,6 +23,11 @@
 		BB4246BE2C00ABFE004C11F2 /* DomainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4246BD2C00ABFE004C11F2 /* DomainError.swift */; };
 		BB4246C12C00AD1E004C11F2 /* FirebaseAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4246C02C00AD1E004C11F2 /* FirebaseAuthError.swift */; };
 		BB4246C32C00AD36004C11F2 /* FirebaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4246C22C00AD36004C11F2 /* FirebaseUser.swift */; };
+		BB4969FC2C173657002670AD /* PartyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4969FB2C173657002670AD /* PartyListView.swift */; };
+		BB4969FE2C17367B002670AD /* InviteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4969FD2C17367B002670AD /* InviteListView.swift */; };
+		BB496A012C173698002670AD /* AddPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB496A002C173698002670AD /* AddPartyView.swift */; };
+		BB496A032C173C90002670AD /* TermsAndConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB496A022C173C90002670AD /* TermsAndConditionsView.swift */; };
+		BB496A052C174298002670AD /* ActivityView++.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB496A042C174298002670AD /* ActivityView++.swift */; };
 		BB60E62F2C075C1400D77BD4 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB60E62D2C075C1400D77BD4 /* TabBarView.swift */; };
 		BB60E6302C075C1400D77BD4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB60E62E2C075C1400D77BD4 /* ContentView.swift */; };
 		BB60E6322C07609000D77BD4 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB60E6312C07609000D77BD4 /* ContentViewModel.swift */; };
@@ -116,6 +121,11 @@
 		BB4246BD2C00ABFE004C11F2 /* DomainError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainError.swift; sourceTree = "<group>"; };
 		BB4246C02C00AD1E004C11F2 /* FirebaseAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthError.swift; sourceTree = "<group>"; };
 		BB4246C22C00AD36004C11F2 /* FirebaseUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUser.swift; sourceTree = "<group>"; };
+		BB4969FB2C173657002670AD /* PartyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyListView.swift; sourceTree = "<group>"; };
+		BB4969FD2C17367B002670AD /* InviteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteListView.swift; sourceTree = "<group>"; };
+		BB496A002C173698002670AD /* AddPartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPartyView.swift; sourceTree = "<group>"; };
+		BB496A022C173C90002670AD /* TermsAndConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsView.swift; sourceTree = "<group>"; };
+		BB496A042C174298002670AD /* ActivityView++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActivityView++.swift"; sourceTree = "<group>"; };
 		BB60E62D2C075C1400D77BD4 /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		BB60E62E2C075C1400D77BD4 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BB60E6312C07609000D77BD4 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
@@ -228,6 +238,64 @@
 			path = Firebase;
 			sourceTree = "<group>";
 		};
+		BB4969F42C1735EE002670AD /* PartyLists */ = {
+			isa = PBXGroup;
+			children = (
+				BB4969F82C173627002670AD /* Data */,
+				BB4969F72C173620002670AD /* Domain */,
+				BB4969F62C173618002670AD /* ViewModels */,
+				BB4969F52C173612002670AD /* Views */,
+			);
+			path = PartyLists;
+			sourceTree = "<group>";
+		};
+		BB4969F52C173612002670AD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BB4969FB2C173657002670AD /* PartyListView.swift */,
+				BB4969FD2C17367B002670AD /* InviteListView.swift */,
+				BB496A002C173698002670AD /* AddPartyView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BB4969F62C173618002670AD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		BB4969F72C173620002670AD /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				BB4969FA2C17363B002670AD /* Model */,
+				BB4969F92C17362E002670AD /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		BB4969F82C173627002670AD /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		BB4969F92C17362E002670AD /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		BB4969FA2C17363B002670AD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		BB60E62B2C075BE600D77BD4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				BB60E6362C07665000D77BD4 /* SettingsView.swift */,
+				BB496A022C173C90002670AD /* TermsAndConditionsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -290,6 +359,7 @@
 				BBC178822BFE21E800FE8FB7 /* Core */,
 				BBC178832BFE220200FE8FB7 /* Root */,
 				BBC178A42BFE2D2600FE8FB7 /* Authentication */,
+				BB4969F42C1735EE002670AD /* PartyLists */,
 				BB60E6332C07661000D77BD4 /* Settings */,
 				BBC178BB2BFE447F00FE8FB7 /* Shared */,
 			);
@@ -432,6 +502,7 @@
 			isa = PBXGroup;
 			children = (
 				BBC178E82BFE44EB00FE8FB7 /* CustomTextStyle++.swift */,
+				BB496A042C174298002670AD /* ActivityView++.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -574,11 +645,12 @@
 			};
 			buildConfigurationList = BBC178502BFE210800FE8FB7 /* Build configuration list for PBXProject "EasyParty" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = fr;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = BBC1784C2BFE210800FE8FB7;
 			packageReferences = (
@@ -658,17 +730,21 @@
 				BBC178F52BFE460900FE8FB7 /* AuthError.swift in Sources */,
 				BBC178E92BFE44EB00FE8FB7 /* CustomTextStyle++.swift in Sources */,
 				BBC178B22BFE444E00FE8FB7 /* AuthViewModel.swift in Sources */,
+				BB496A032C173C90002670AD /* TermsAndConditionsView.swift in Sources */,
 				BBC178AE2BFE2FAF00FE8FB7 /* FirebaseAuthService.swift in Sources */,
 				BB375B132C01E99D0015C117 /* RegisterWithEmailUseCase.swift in Sources */,
 				BBC178EB2BFE451600FE8FB7 /* CustomProgressView.swift in Sources */,
+				BB496A052C174298002670AD /* ActivityView++.swift in Sources */,
 				BB375B172C01EA4B0015C117 /* LoginWithGoogleUseCase.swift in Sources */,
 				BB60E6302C075C1400D77BD4 /* ContentView.swift in Sources */,
+				BB4969FC2C173657002670AD /* PartyListView.swift in Sources */,
 				BB8B0C2F2C03A3AF00C1F7F1 /* AuthInjector.swift in Sources */,
 				BBA3CAD12C078C4C00C5B21D /* SignOutUseCase.swift in Sources */,
 				BB0EA6F92C0CBAF300C6A422 /* DeleteAccountUseCase.swift in Sources */,
 				BB1006682C0A062B006BAE6D /* ResetPasswordView.swift in Sources */,
 				BB375B112C01E8C50015C117 /* LoginWithEmailUseCase.swift in Sources */,
 				BB1DD7F22C087FD5004E5CAC /* SettingsViewModel.swift in Sources */,
+				BB496A012C173698002670AD /* AddPartyView.swift in Sources */,
 				BB4246BC2C00AB8C004C11F2 /* AuthRepository.swift in Sources */,
 				BB60E6372C07665000D77BD4 /* SettingsView.swift in Sources */,
 				BB2392F12BFF80F000F59F68 /* AppleSignInService.swift in Sources */,
@@ -683,6 +759,7 @@
 				BB8B0C2D2C039FEB00C1F7F1 /* ButtonLoginInWithAppleUseCase.swift in Sources */,
 				BBF53F2D2C04D89500485B94 /* GetGoogleCredentialsUseCase.swift in Sources */,
 				BB4246C12C00AD1E004C11F2 /* FirebaseAuthError.swift in Sources */,
+				BB4969FE2C17367B002670AD /* InviteListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

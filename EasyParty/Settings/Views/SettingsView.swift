@@ -15,6 +15,8 @@ struct SettingsView: View {
     
     @State private var selectedItems: [PhotosPickerItem] = []
     @State private var isImageLoading = false
+    @State private var navigateToTerms = false
+    @State private var showingShareSheet = false
     
     var body: some View {
         NavigationStack {
@@ -27,7 +29,7 @@ struct SettingsView: View {
                 VStack {
                     List {
                         Button {
-                            
+                            showingShareSheet = true
                         } label: {
                             HStack {
                                 Image(systemName: "arrowshape.turn.up.right")
@@ -38,11 +40,13 @@ struct SettingsView: View {
                                 Image(systemName: "chevron.right")
                                     .foregroundStyle(.flamingo)
                             }
-                            
+                        }
+                        .sheet(isPresented: $showingShareSheet) {
+                            ActivityView(activityItems: ["Découvrez l'application Easy Party ! Téléchargez-la ici : [lien de téléchargement]"])
                         }
                         
                         Button {
-                            
+                            navigateToTerms = true
                         } label: {
                             HStack {
                                 Image(systemName: "doc")
@@ -53,8 +57,8 @@ struct SettingsView: View {
                                 Image(systemName: "chevron.right")
                                     .foregroundStyle(.flamingo)
                             }
-                            
                         }
+                        
                         
                         DisclosureGroup("Compte") {
                             Button {
@@ -84,44 +88,46 @@ struct SettingsView: View {
                 }
                 
             }
-        }
-        .background(.customBackground)
-        .actionSheet(isPresented: $showingDeleteAlert) {
-            ActionSheet(
-                title: Text("Confirmez la suppression"),
-                message: Text(
-                    "Êtes-vous sûr de vouloir supprimer définitivement votre compte? Cette action est irréversible."
-                ),
-                buttons: [
-                    .destructive(
-                        Text("Supprimer"),
-                        action: {
-                            Task {
-                                viewModel.deleteAccount()
-                                
-                            }
-                            dismiss()
-                        }),
-                    .cancel(),
-                ]
-            )
-        }
-        .toolbar(.hidden, for: .tabBar)
-        .navigationTitle("Paramètres")
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(
-            trailing: Button("Fermer") {
-                //          viewModel.saveProfileChanges()
-                dismiss()
+            .background(.customBackground)
+            .actionSheet(isPresented: $showingDeleteAlert) {
+                ActionSheet(
+                    title: Text("Confirmez la suppression"),
+                    message: Text(
+                        "Êtes-vous sûr de vouloir supprimer définitivement votre compte? Cette action est irréversible."
+                    ),
+                    buttons: [
+                        .destructive(
+                            Text("Supprimer"),
+                            action: {
+                                Task {
+                                    viewModel.deleteAccount()
+                                    
+                                }
+                                dismiss()
+                            }),
+                        .cancel(),
+                    ]
+                )
             }
-                .foregroundStyle(.flamingo)
-                .fontWeight(.bold)
-        )
-        .onAppear {
-            viewModel.loadUserInfo()
+            .toolbar(.hidden, for: .tabBar)
+            .navigationTitle("Paramètres")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(
+                trailing: Button("Fermer") {
+                    //          viewModel.saveProfileChanges()
+                    dismiss()
+                }
+                    .foregroundStyle(.flamingo)
+                    .fontWeight(.bold)
+            )
+            .onAppear {
+                viewModel.loadUserInfo()
+            }
+            .navigationDestination(isPresented: $navigateToTerms) {
+                TermsAndConditionsView()
+            }
         }
     }
-    
 }
 
 #Preview {

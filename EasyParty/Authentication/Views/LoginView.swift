@@ -13,8 +13,8 @@ struct LoginView: View {
     
     var body: some View {
         NavigationStack {
-            
             VStack(spacing: 20) {
+                
                 IntroLogin()
                 
                 Spacer()
@@ -27,7 +27,7 @@ struct LoginView: View {
                 
                 Spacer()
             }
-            .padding()
+            .frame(maxWidth: .infinity)
             .background(.customBackground)
             .navigationTitle("Connexions")
             .navigationBarTitleDisplayMode(.inline)
@@ -75,6 +75,7 @@ struct LoginView: View {
                     .cornerRadius(10)
             }
         }
+        .padding()
     }
 }
 
