@@ -112,14 +112,7 @@ struct SettingsView: View {
                 )
             }
             .sheet(isPresented: $showingAppleSignInAlert) {
-                VStack {
-                    Text("Pour supprimer votre compte, merci de vous reconnecter.")
-                        .padding()
-                    viewModel.getAppleSignInButton()
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                        .cornerRadius(10)
-                }
-                .padding()
+                AppleSignInAlertView(viewModel: viewModel)
             }
             .toolbar(.hidden, for: .tabBar)
             .navigationTitle("Paramètres")
@@ -134,6 +127,24 @@ struct SettingsView: View {
             .navigationDestination(isPresented: $navigateToTerms) {
                 TermsAndConditionsView()
             }
+        }
+    }
+    
+    @ViewBuilder
+    private func AppleSignInAlertView(viewModel: SettingsViewModel) -> some View {
+        ZStack{
+            Color.customBackground.edgesIgnoringSafeArea(.all)
+            VStack {
+                Text("Pour supprimer votre compte, merci de vous reconnecter.")
+                    .padding()
+                    .multilineTextAlignment(.center)
+                viewModel.getAppleSignInButton()
+                    .frame(maxWidth: .infinity, maxHeight: 50)
+                    .cornerRadius(10)
+            }
+            .presentationDetents([.height(200)])
+            .presentationDragIndicator(.visible)
+            .padding()
         }
     }
 }

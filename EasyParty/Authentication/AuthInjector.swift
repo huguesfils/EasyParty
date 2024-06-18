@@ -6,10 +6,15 @@
 //
 
 import Foundation
+import CloudDBClient
 
 struct AuthInjector {
+    private static func cloudDBClient() -> CloudDBClient {
+            return DefaultCloudDBClient()
+        }
+    
     private static func service() -> FirebaseAuthService {
-        return DefaultFirebaseAuthService()
+        return DefaultFirebaseAuthService(cloudDbClient: cloudDBClient())
     }
     
     private static func repository() -> AuthRepository {

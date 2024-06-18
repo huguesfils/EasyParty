@@ -30,6 +30,7 @@ final class SettingsViewModel: ObservableObject {
         comfirmAppleSignInUseCase.execute(completion: { result in
             switch result {
             case .success:
+                //bool progressview
                     NotificationCenter.default.post(name: .currentUserDidLogOut, object: nil, userInfo: nil)
             case .failure(let error):
                 print("Error deleting account: \(error.localizedDescription)")

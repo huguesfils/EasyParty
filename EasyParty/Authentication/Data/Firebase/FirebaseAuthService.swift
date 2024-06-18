@@ -6,11 +6,11 @@
 //
 
 import FirebaseAuth
-import FirebaseFirestore
 import GoogleSignIn
 import GoogleSignInSwift
 import CryptoKit
 import AuthenticationServices
+import CloudDBClient
 
 protocol FirebaseAuthService {
     func loginWithEmail(email: String, password: String) async -> Result<FirebaseUser, FirebaseAuthError>
@@ -31,6 +31,8 @@ protocol FirebaseAuthService {
 }
 
 struct DefaultFirebaseAuthService: FirebaseAuthService {
+    let cloudDbClient: CloudDBClient
+    
     func loginWithEmail(email: String, password: String) async -> Result<
         FirebaseUser, FirebaseAuthError > {
             do {
@@ -143,7 +145,7 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
             return .failure(FirebaseAuthError(authErrorCode: .userNotFound))
         }
         do {
-            deleteUserData(user.uid)
+            try await deleteUserData(user.uid)
             try await user.delete()
             return .success(())
         } catch {
@@ -160,7 +162,7 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
         do {
             try await Auth.auth().revokeToken(withAuthorizationCode: authorizationCode)
             
-            deleteUserData(user.uid)
+            try await deleteUserData(user.uid)
             
             try await user.delete()
             return .success(())
@@ -171,32 +173,21 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
     }
     
     private func fetchUserData(_ id: String) async throws -> FirebaseUser {
-        let documentSnapshot = try await Firestore.firestore().collection("users").document(id).getDocument()
-        
-        if let data = documentSnapshot.data() {
-            print("User data fetched: \(data)")
-        } else {
-            print("No user data found for id: \(id)")
+        let result = await cloudDbClient.fetch(FirebaseUser.self, table: .users, id: id)
+        switch result {
+        case .success(let user):
+            return user
+        case .failure(let failure):
+            throw failure
         }
-        
-        return try documentSnapshot.data(as: FirebaseUser.self)
     }
     
     private func setUserData(user: User) async throws {
-        guard let encodedUser = try? Firestore.Encoder().encode(user) else {
-            throw FirebaseAuthError.unknown
-        }
-        try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser, merge: true)
+        try await cloudDbClient.create(user, table: .users)
     }
     
-    func deleteUserData(_ id: String) {
-        Firestore.firestore().collection("users").document(id).delete { err in
-            if let err = err {
-                print("Erreur lors de la suppression des données utilisateur Firestore : \(err)")
-            } else {
-                print("Données utilisateur Firestore supprimées avec succès.")
-            }
-        }
+    private func deleteUserData(_ id: String) async throws {
+        try await cloudDbClient.delete(table: .users, id: id)
     }
 }
 
