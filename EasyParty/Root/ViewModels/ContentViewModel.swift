@@ -5,6 +5,7 @@
 //  Created by Hugues Fils on 29/05/2024.
 //
 
+import SharedDomain
 import Foundation
 
 final class ContentViewModel: ObservableObject {
@@ -26,10 +27,3 @@ final class ContentViewModel: ObservableObject {
         isLoggedIn = false
     }
 }
-
-extension NSNotification.Name {
-    static let currentUserDidLogIn = NSNotification.Name("fr.app.currentUserDidLogIn")
-    static let currentUserDidLogOut = NSNotification.Name("fr.app.currentUserDidLogOut")
-}
-
-
