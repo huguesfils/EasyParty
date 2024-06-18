@@ -6,7 +6,6 @@
 //
 
 import FirebaseAuth
-import FirebaseCore
 import FirebaseFirestore
 import GoogleSignIn
 import GoogleSignInSwift
@@ -28,6 +27,7 @@ protocol FirebaseAuthService {
     
     func deleteAccount() async -> Result<Void, FirebaseAuthError>
     
+    func deleteAppleAccount(authorizationCode: String) async -> Result<Void, FirebaseAuthError>
 }
 
 struct DefaultFirebaseAuthService: FirebaseAuthService {
@@ -47,7 +47,7 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
     func registerWithEmail(email: String, password: String, fullname: String) async -> Result<FirebaseUser, FirebaseAuthError> {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
-            let user = User(id: result.user.uid, fullname: fullname, email: email)
+            let user = User(id: result.user.uid, fullname: fullname, email: email, connectionType: .email)
             let id = result.user.uid
             
             try await setUserData(user: user)
@@ -78,7 +78,7 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
                 let formattedFullName = [givenName, familyName].compactMap { $0 }
                     .joined(separator: " ")
                 
-                let user = User(id: result.user.uid, fullname: formattedFullName, email: email)
+                let user = User(id: result.user.uid, fullname: formattedFullName, email: email, connectionType: .apple)
                 
                 try await setUserData(user: user)
                 
@@ -108,7 +108,8 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
                     id: result.user.uid,
                     fullname: result.user.displayName ?? "",
                     email: result.user.email ?? "",
-                    imageUrl: nil
+                    imageUrl: nil,
+                    connectionType: .google
                 )
                 
                 let id = result.user.uid
@@ -138,52 +139,36 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
     }
     
     func deleteAccount() async -> Result<Void, FirebaseAuthError> {
-            guard let user = Auth.auth().currentUser else {
-                return .failure(FirebaseAuthError(authErrorCode: .userNotFound))
-            }
-            do {
-                deleteUserData(user.uid)
-                try await user.delete()
-                return .success(())
-            } catch {
-                let authError = AuthErrorCode.Code(rawValue: (error as NSError).code)
-                return .failure(FirebaseAuthError(authErrorCode: authError ?? .userNotFound))
-            }
+        guard let user = Auth.auth().currentUser else {
+            return .failure(FirebaseAuthError(authErrorCode: .userNotFound))
         }
+        do {
+            deleteUserData(user.uid)
+            try await user.delete()
+            return .success(())
+        } catch {
+            let authError = AuthErrorCode.Code(rawValue: (error as NSError).code)
+            return .failure(FirebaseAuthError(authErrorCode: authError ?? .userNotFound))
+        }
+    }
     
-    func deleteAppleAccount(_ token: String) async -> Result<Void, FirebaseAuthError> {
-            guard let user = Auth.auth().currentUser else {
-                return .failure(FirebaseAuthError(authErrorCode: .userNotFound))
-            }
-            let needsTokenRevocation = user.providerData.contains { $0.providerID == "apple.com" }
-//            guard let lastSignInDate = user.metadata.lastSignInDate else {
-//                return .failure(FirebaseAuthError(authErrorCode: .userNotFound))
-//            }
-
-//            let needsReauth = !lastSignInDate.isWithinPast(minutes: 5)
-
-            do {
-                if needsTokenRevocation {
-                 
-                    try await Auth.auth().revokeToken(withAuthorizationCode: user.getIDToken())
-                }
-//                if needsReauth {
-//                    guard let email = user.email else {
-//                        return .failure(FirebaseAuthError(authErrorCode: .userNotFound))
-//                    }
-//                    let credential = EmailAuthProvider.credential(withEmail: email, password: "user_password")
-//                    try await user.reauthenticate(with: credential)
-//                }
-
-                deleteUserData(user.uid)
-                
-                try await user.delete()
-                return .success(())
-            } catch {
-                let authError = AuthErrorCode.Code(rawValue: (error as NSError).code)
-                return .failure(FirebaseAuthError(authErrorCode: authError ?? .userNotFound))
-            }
+    func deleteAppleAccount(authorizationCode: String) async -> Result<Void, FirebaseAuthError> {
+        guard let user = Auth.auth().currentUser else {
+            return .failure(FirebaseAuthError(authErrorCode: .userNotFound))
         }
+        
+        do {
+            try await Auth.auth().revokeToken(withAuthorizationCode: authorizationCode)
+            
+            deleteUserData(user.uid)
+            
+            try await user.delete()
+            return .success(())
+        } catch {
+            let authError = AuthErrorCode.Code(rawValue: (error as NSError).code)
+            return .failure(FirebaseAuthError(authErrorCode: authError ?? .userNotFound))
+        }
+    }
     
     private func fetchUserData(_ id: String) async throws -> FirebaseUser {
         let documentSnapshot = try await Firestore.firestore().collection("users").document(id).getDocument()

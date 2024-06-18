@@ -11,6 +11,7 @@ import SwiftUI
 struct SettingsView: View {
     @ObservedObject var viewModel: SettingsViewModel
     @State private var showingDeleteAlert = false
+    @State private var showingAppleSignInAlert = false
     @Environment(\.dismiss) var dismiss
     
     @State private var selectedItems: [PhotosPickerItem] = []
@@ -21,7 +22,7 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Text( viewModel.fullName ?? "Utilisateur")
+                Text(viewModel.user.fullname)
                     .font(.title)
                 
                 Spacer()
@@ -59,7 +60,6 @@ struct SettingsView: View {
                             }
                         }
                         
-                        
                         DisclosureGroup("Compte") {
                             Button {
                                 viewModel.signOut()
@@ -82,11 +82,10 @@ struct SettingsView: View {
                                 }
                             }
                         }
-                    }.scrollContentBackground(.hidden)
-                        .scrollDisabled(true)
-                    
+                    }
+                    .scrollContentBackground(.hidden)
+                    .scrollDisabled(true)
                 }
-                
             }
             .background(.customBackground)
             .actionSheet(isPresented: $showingDeleteAlert) {
@@ -99,30 +98,39 @@ struct SettingsView: View {
                         .destructive(
                             Text("Supprimer"),
                             action: {
-                                Task {
-                                    viewModel.deleteAccount()
-                                    
+                                if viewModel.user.connectionType == .apple {
+                                    showingAppleSignInAlert = true
+                                } else {
+                                    Task {
+                                        viewModel.deleteAccount()
+                                    }
+                                    dismiss()
                                 }
-                                dismiss()
                             }),
                         .cancel(),
                     ]
                 )
+            }
+            .sheet(isPresented: $showingAppleSignInAlert) {
+                VStack {
+                    Text("Pour supprimer votre compte, merci de vous reconnecter.")
+                        .padding()
+                    viewModel.getAppleSignInButton()
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                        .cornerRadius(10)
+                }
+                .padding()
             }
             .toolbar(.hidden, for: .tabBar)
             .navigationTitle("Paramètres")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(
                 trailing: Button("Fermer") {
-                    //          viewModel.saveProfileChanges()
                     dismiss()
                 }
                     .foregroundStyle(.flamingo)
                     .fontWeight(.bold)
             )
-            .onAppear {
-                viewModel.loadUserInfo()
-            }
             .navigationDestination(isPresented: $navigateToTerms) {
                 TermsAndConditionsView()
             }
@@ -131,5 +139,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(viewModel: SettingsViewModel(signOutUseCase: AuthInjector.signOut(), deleteAccountUseCase: AuthInjector.deleteAccountUseCase()))
+    SettingsView(viewModel: SettingsViewModel(user: User.mock, signOutUseCase: SettingsInjector.signOut(), deleteAccountUseCase: SettingsInjector.deleteAccountUseCase(), comfirmAppleSignInUseCase: SettingsInjector.comfirmAppleSignInUseCase()))
 }

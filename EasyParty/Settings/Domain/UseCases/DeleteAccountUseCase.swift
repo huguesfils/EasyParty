@@ -12,7 +12,8 @@ protocol DeleteAccountUseCase {
 }
 
 struct DefaultDeleteAccountUseCase: DeleteAccountUseCase {
-    let repository: AuthRepository
+    
+    let repository: UserRepository
     
     func execute() async -> Result<Void, AuthError> {
         clearUserInfo()

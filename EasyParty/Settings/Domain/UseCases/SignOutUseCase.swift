@@ -13,7 +13,7 @@ protocol SignOutUseCase {
 
 struct DefaultSignOutUseCase: SignOutUseCase {
 
-    let repository: AuthRepository
+    let repository: UserRepository
     
     func execute() throws {
         clearUserInfo()

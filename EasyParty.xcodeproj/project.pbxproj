@@ -83,6 +83,10 @@
 		BBC178F32BFE45C000FE8FB7 /* CustomDisclosureGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC178F22BFE45BF00FE8FB7 /* CustomDisclosureGroup.swift */; };
 		BBC178F52BFE460900FE8FB7 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC178F42BFE460900FE8FB7 /* AuthError.swift */; };
 		BBF53F2D2C04D89500485B94 /* GetGoogleCredentialsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF53F2C2C04D89500485B94 /* GetGoogleCredentialsUseCase.swift */; };
+		BBFCC3492C189FF90024FB73 /* ComfirmAppleSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFCC3482C189FF90024FB73 /* ComfirmAppleSignInUseCase.swift */; };
+		BBFCC34E2C18A0FD0024FB73 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFCC34D2C18A0FD0024FB73 /* UserRepository.swift */; };
+		BBFCC3502C18A1C50024FB73 /* SettingsInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFCC34F2C18A1C50024FB73 /* SettingsInjector.swift */; };
+		BBFCC3522C18B15B0024FB73 /* AppInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFCC3512C18B15B0024FB73 /* AppInjector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,6 +178,10 @@
 		BBC178F22BFE45BF00FE8FB7 /* CustomDisclosureGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDisclosureGroup.swift; sourceTree = "<group>"; };
 		BBC178F42BFE460900FE8FB7 /* AuthError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		BBF53F2C2C04D89500485B94 /* GetGoogleCredentialsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetGoogleCredentialsUseCase.swift; sourceTree = "<group>"; };
+		BBFCC3482C189FF90024FB73 /* ComfirmAppleSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComfirmAppleSignInUseCase.swift; sourceTree = "<group>"; };
+		BBFCC34D2C18A0FD0024FB73 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		BBFCC34F2C18A1C50024FB73 /* SettingsInjector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInjector.swift; sourceTree = "<group>"; };
+		BBFCC3512C18B15B0024FB73 /* AppInjector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInjector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,8 +324,11 @@
 		BB60E6332C07661000D77BD4 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				BBFCC34C2C18A0ED0024FB73 /* Data */,
+				BBFCC34A2C18A06C0024FB73 /* Domain */,
 				BB1DD7F32C08804E004E5CAC /* ViewModels */,
 				BB60E6342C07661C00D77BD4 /* Views */,
+				BBFCC34F2C18A1C50024FB73 /* SettingsInjector.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -473,9 +484,7 @@
 				BB8B0C2C2C039FEB00C1F7F1 /* ButtonLoginInWithAppleUseCase.swift */,
 				BB375B162C01EA4B0015C117 /* LoginWithGoogleUseCase.swift */,
 				BBF53F2C2C04D89500485B94 /* GetGoogleCredentialsUseCase.swift */,
-				BBA3CAD02C078C4C00C5B21D /* SignOutUseCase.swift */,
 				BB10066A2C0A1BC2006BAE6D /* ResetPasswordUseCase.swift */,
-				BB0EA6F82C0CBAF300C6A422 /* DeleteAccountUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -523,6 +532,7 @@
 			isa = PBXGroup;
 			children = (
 				BB4246BD2C00ABFE004C11F2 /* DomainError.swift */,
+				BBFCC3512C18B15B0024FB73 /* AppInjector.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -550,6 +560,32 @@
 				BBC178D32BFE44E100FE8FB7 /* Poppins-SemiBoldItalic.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		BBFCC34A2C18A06C0024FB73 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				BBFCC34B2C18A0730024FB73 /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		BBFCC34B2C18A0730024FB73 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				BBFCC3482C189FF90024FB73 /* ComfirmAppleSignInUseCase.swift */,
+				BB0EA6F82C0CBAF300C6A422 /* DeleteAccountUseCase.swift */,
+				BBA3CAD02C078C4C00C5B21D /* SignOutUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		BBFCC34C2C18A0ED0024FB73 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				BBFCC34D2C18A0FD0024FB73 /* UserRepository.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -747,6 +783,8 @@
 				BB496A012C173698002670AD /* AddPartyView.swift in Sources */,
 				BB4246BC2C00AB8C004C11F2 /* AuthRepository.swift in Sources */,
 				BB60E6372C07665000D77BD4 /* SettingsView.swift in Sources */,
+				BBFCC3522C18B15B0024FB73 /* AppInjector.swift in Sources */,
+				BBFCC34E2C18A0FD0024FB73 /* UserRepository.swift in Sources */,
 				BB2392F12BFF80F000F59F68 /* AppleSignInService.swift in Sources */,
 				BBC178F12BFE45B800FE8FB7 /* CustomDateField.swift in Sources */,
 				BB1006692C0A062B006BAE6D /* RegisterView.swift in Sources */,
@@ -755,8 +793,10 @@
 				BB10066B2C0A1BC2006BAE6D /* ResetPasswordUseCase.swift in Sources */,
 				BB4246BE2C00ABFE004C11F2 /* DomainError.swift in Sources */,
 				BB60E6322C07609000D77BD4 /* ContentViewModel.swift in Sources */,
+				BBFCC3492C189FF90024FB73 /* ComfirmAppleSignInUseCase.swift in Sources */,
 				BBC178EF2BFE45AE00FE8FB7 /* CustomFormField.swift in Sources */,
 				BB8B0C2D2C039FEB00C1F7F1 /* ButtonLoginInWithAppleUseCase.swift in Sources */,
+				BBFCC3502C18A1C50024FB73 /* SettingsInjector.swift in Sources */,
 				BBF53F2D2C04D89500485B94 /* GetGoogleCredentialsUseCase.swift in Sources */,
 				BB4246C12C00AD1E004C11F2 /* FirebaseAuthError.swift in Sources */,
 				BB4969FE2C17367B002670AD /* InviteListView.swift in Sources */,

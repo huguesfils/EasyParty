@@ -5,27 +5,36 @@
 //  Created by Hugues Fils on 30/05/2024.
 //
 
-import Foundation
+import SwiftUI
 
 final class SettingsViewModel: ObservableObject {
     let signOutUseCase: SignOutUseCase
     let deleteAccountUseCase: DeleteAccountUseCase
+    let comfirmAppleSignInUseCase: ComfirmAppleSignInUseCase
     
-    @Published var email: String?
-    @Published var fullName: String?
+    @Published var user: User
     
-    init(signOutUseCase: SignOutUseCase, deleteAccountUseCase: DeleteAccountUseCase, email: String? = nil, fullName: String? = nil) {
+    init(user: User,
+         signOutUseCase: SignOutUseCase,
+         deleteAccountUseCase: DeleteAccountUseCase,
+         comfirmAppleSignInUseCase: ComfirmAppleSignInUseCase) {
+        self.user = user
         self.signOutUseCase = signOutUseCase
         self.deleteAccountUseCase = deleteAccountUseCase
-        self.email = email
-        self.fullName = fullName
+        self.comfirmAppleSignInUseCase = comfirmAppleSignInUseCase
     }
     
-    func loadUserInfo() {
-        guard let data = UserDefaults.standard.object(forKey: "currentUser") as? Data else { return }
-        let user = try? JSONDecoder().decode(User.self, from: data)
-        self.email = user?.email
-        self.fullName = user?.fullname
+    
+    @ViewBuilder
+    func getAppleSignInButton() -> AppleSignInButton {
+        comfirmAppleSignInUseCase.execute(completion: { result in
+            switch result {
+            case .success:
+                    NotificationCenter.default.post(name: .currentUserDidLogOut, object: nil, userInfo: nil)
+            case .failure(let error):
+                print("Error deleting account: \(error.localizedDescription)")
+            }
+        })
     }
     
     func signOut() {

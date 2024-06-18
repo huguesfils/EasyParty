@@ -18,9 +18,6 @@ protocol AuthRepository {
     
     func resetPassword(toEmail email: String) async -> Result<Void, AuthError>
     
-    func signOut() throws
-    
-    func deleteAccount() async -> Result<Void, AuthError>
 }
 
 struct DefaultAuthRepository: AuthRepository {
@@ -53,15 +50,6 @@ struct DefaultAuthRepository: AuthRepository {
     
     func resetPassword(toEmail email: String) async -> Result<Void, AuthError> {
         return await authService.resetPassword(toEmail: email)
-            .mapError { $0.toDomain() }
-    }
-    
-    func signOut() throws {
-        return try authService.signOut()
-    }
-    
-    func deleteAccount() async -> Result<Void, AuthError> {
-        return await authService.deleteAccount()
             .mapError { $0.toDomain() }
     }
 }

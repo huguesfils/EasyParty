@@ -35,11 +35,12 @@ struct PartyListView: View {
                 }
             }
             .sheet(isPresented: $isShowingSettings) {
-                SettingsView(viewModel: SettingsViewModel(signOutUseCase: AuthInjector.signOut(), deleteAccountUseCase: AuthInjector.deleteAccountUseCase()))
+                
+                if let data = UserDefaults.standard.object(forKey: "currentUser") as? Data, let user = try? JSONDecoder().decode(User.self, from: data) {
+                    SettingsView(viewModel: SettingsViewModel(user: user, signOutUseCase: SettingsInjector.signOut(), deleteAccountUseCase: SettingsInjector.deleteAccountUseCase(), comfirmAppleSignInUseCase: SettingsInjector.comfirmAppleSignInUseCase()))
+                }
             }
         }
-        
-        
     }
 }
 

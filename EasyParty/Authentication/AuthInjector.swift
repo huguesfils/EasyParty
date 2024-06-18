@@ -7,12 +7,6 @@
 
 import Foundation
 
-struct AppInjector {
-    static let shared = AppInjector()
-    let appleService = DefaultAppleSignInService()
-    let googleService = DefaultGoogleSignInService()
-}
-
 struct AuthInjector {
     private static func service() -> FirebaseAuthService {
         return DefaultFirebaseAuthService()
@@ -48,13 +42,5 @@ struct AuthInjector {
     
     static func resetPasswordUseCase() -> ResetPasswordUseCase {
         return DefaultResetPasswordUseCase(repository: repository())
-    }
-    
-    static func signOut() -> SignOutUseCase {
-        return DefaultSignOutUseCase(repository: repository())
-    }
-    
-    static func deleteAccountUseCase() -> DeleteAccountUseCase {
-        return DefaultDeleteAccountUseCase(repository: repository())
     }
 }

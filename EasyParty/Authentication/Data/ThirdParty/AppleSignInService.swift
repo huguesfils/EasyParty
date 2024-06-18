@@ -25,12 +25,19 @@ struct AppleSignInUser {
 
 protocol AppleSignInService {
     func signInButton(_ completion: @escaping (Result<AppleSignInUser, AppleSignInError>) -> Void) -> AppleSignInButton
+    func confirmSignInButton(_ completion: @escaping (Result<String, AppleSignInError>) -> Void) -> AppleSignInButton
 }
 
 struct DefaultAppleSignInService: AppleSignInService {
     func signInButton(_ completion: @escaping (Result<AppleSignInUser, AppleSignInError>) -> Void) -> AppleSignInButton {
         AppleSignInButton(onRequest: handleRequest(_:), onCompletion: {
-           completion(handleResult($0))
+            completion(handleResult($0))
+        })
+    }
+    
+    func confirmSignInButton(_ completion: @escaping (Result<String, AppleSignInError>) -> Void) -> AppleSignInButton {
+        AppleSignInButton(onRequest: handleRequest(_:), onCompletion: {
+            completion(handleResult($0))
         })
     }
     
@@ -56,6 +63,21 @@ struct DefaultAppleSignInService: AppleSignInService {
                                   email: appleIDCredential.email,
                                   givenName: appleIDCredential.fullName?.givenName,
                                   familyName: appleIDCredential.fullName?.familyName))
+        case .failure:
+            return .failure(.unknown)
+        }
+    }
+    
+    private func handleResult(_ result: Result<ASAuthorization, Error>) -> Result<String, AppleSignInError> {
+        switch result {
+        case .success(let authorization):
+            guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential,
+                  let authorizationCode = appleIDCredential.authorizationCode,
+                  let authCodeString = String(data: authorizationCode, encoding: .utf8) else {
+                return .failure(.unknown)
+            }
+            return .success(authCodeString)
+            
         case .failure:
             return .failure(.unknown)
         }

@@ -12,10 +12,11 @@ struct FirebaseUser: Decodable {
     let fullname: String
     let email: String
     let imageUrl: String?
+    let connectionType: ConnectionType
 }
 
 extension FirebaseUser {
   func toDomain() -> User {
-      return .init(id: self.id, fullname: self.fullname, email: self.email, imageUrl: self.imageUrl)
+      return .init(id: self.id, fullname: self.fullname, email: self.email, imageUrl: self.imageUrl, connectionType: self.connectionType)
   }
 }
