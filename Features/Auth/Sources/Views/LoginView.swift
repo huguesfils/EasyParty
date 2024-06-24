@@ -9,10 +9,10 @@ import AuthenticationServices
 import SwiftUI
 import SharedDomain
 
-struct LoginView: View {
+public struct LoginView: View {
     @ObservedObject var viewModel: AuthViewModel
     
-    var body: some View {
+    public var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
                 

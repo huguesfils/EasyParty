@@ -5,9 +5,8 @@
 //  Created by Hugues Fils on 22/05/2024.
 //
 
-//import FirebaseAuth
-//import FirebaseCore
 import SwiftUI
+import Auth
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     
@@ -16,8 +15,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
         
-//        FirebaseApp.configure()
-        // TODO
+        AuthInjector.register()
+        
         return true
     }
 }

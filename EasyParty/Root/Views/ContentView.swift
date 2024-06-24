@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Auth
 
 struct ContentView: View {
     @ObservedObject var viewModel: ContentViewModel
@@ -14,7 +15,7 @@ struct ContentView: View {
         if viewModel.isLoggedIn {
             TabBarView()
         } else {
-            LoginView(viewModel: .init(loginWithEmailUseCase: AuthInjector.loginWithEmailUseCase(), registerWithEmailUseCase: AuthInjector.registerWithEmailUseCase(), loginWithAppleUseCase: AuthInjector.loginWithAppleUseCase(), buttonLoginInWithAppleUseCase: AuthInjector.buttonLoginInWithAppleUseCase(), loginWithGoogleUseCase: AuthInjector.loginWithGoogle(), getGoogleCredentialsUseCase: AuthInjector.getGoogleCredentialsUseCase(), resetPasswordUseCase: AuthInjector.resetPasswordUseCase()))
+            AuthInjector.getLoginView()
         }
     }
 }

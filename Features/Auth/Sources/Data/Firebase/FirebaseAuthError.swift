@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseAuth
 
-enum FirebaseAuthError: Error {
+public enum FirebaseAuthError: Error {
     case invalidCredential
     case unknown
     
@@ -22,7 +22,7 @@ enum FirebaseAuthError: Error {
     }
 }
 
-extension FirebaseAuthError {
+public extension FirebaseAuthError {
   func toDomain() -> AuthError {
       switch self {
       case .invalidCredential:

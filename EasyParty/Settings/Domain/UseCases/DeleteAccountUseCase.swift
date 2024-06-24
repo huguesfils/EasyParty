@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Auth
 
 protocol DeleteAccountUseCase {
     func execute() async -> Result<Void, AuthError>

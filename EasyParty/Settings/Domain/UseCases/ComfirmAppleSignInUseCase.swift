@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Auth
 
 protocol ComfirmAppleSignInUseCase {
     func execute(completion: @escaping (Result<Void, AppleSignInError>) -> Void) -> AppleSignInButton
@@ -26,6 +27,8 @@ struct DefaultComfirmAppleSignInUseCase: ComfirmAppleSignInUseCase {
                     DispatchQueue.main.async {
                         switch deleteResult {
                         case .success:
+                            clearUserInfo()
+                            
                             completion(.success(Void()))
                         case .failure:
                             completion(.failure(.unknown))
@@ -36,5 +39,9 @@ struct DefaultComfirmAppleSignInUseCase: ComfirmAppleSignInUseCase {
                 completion(.failure(error))
             }
         }
+    }
+    
+    private func clearUserInfo() {
+        UserDefaults.standard.removeObject(forKey: "currentUser")
     }
 }

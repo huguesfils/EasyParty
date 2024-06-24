@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum AuthError: Error {
+public enum AuthError: Error {
     case invalidCredential
     case unknown
     case tokenError
     
-    var description: String {
+    public var description: String {
         switch self {
         case .invalidCredential:
             return "Il semble qu'il n'y ait aucun compte associé à cette adresse e-mail. Créez un compte pour continuer."

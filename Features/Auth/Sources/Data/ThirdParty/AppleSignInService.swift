@@ -10,12 +10,12 @@ import AuthenticationServices
 import CryptoKit
 import SwiftUI
 
-enum AppleSignInError: Error {
+public enum AppleSignInError: Error {
     case unknown
     case tokenError
 }
 
-struct AppleSignInUser {
+public struct AppleSignInUser {
     let token: String
     let nonce: String
     let email: String?
@@ -23,7 +23,7 @@ struct AppleSignInUser {
     let familyName: String?
 }
 
-protocol AppleSignInService {
+public protocol AppleSignInService {
     func signInButton(_ completion: @escaping (Result<AppleSignInUser, AppleSignInError>) -> Void) -> AppleSignInButton
     func confirmSignInButton(_ completion: @escaping (Result<String, AppleSignInError>) -> Void) -> AppleSignInButton
 }
@@ -127,11 +127,11 @@ struct DefaultAppleSignInService: AppleSignInService {
     }
 }
 
-struct AppleSignInButton: View {
+public struct AppleSignInButton: View {
     let onRequest: (ASAuthorizationAppleIDRequest) -> Void
     let onCompletion: (Result<ASAuthorization, any Error>) -> Void
     
-    var body: some View {
+    public var body: some View {
         SignInWithAppleButton(.signIn) { request in
             onRequest(request)
         } onCompletion: { result in

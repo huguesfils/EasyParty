@@ -8,7 +8,7 @@
 import Foundation
 import SharedDomain
 
-struct FirebaseUser: Decodable {
+public struct FirebaseUser: Decodable {
     let id: String
     let fullname: String
     let email: String
@@ -16,7 +16,7 @@ struct FirebaseUser: Decodable {
     let connectionType: ConnectionType
 }
 
-extension FirebaseUser {
+public extension FirebaseUser {
   func toDomain() -> User {
       return .init(id: self.id, fullname: self.fullname, email: self.email, imageUrl: self.imageUrl, connectionType: self.connectionType)
   }

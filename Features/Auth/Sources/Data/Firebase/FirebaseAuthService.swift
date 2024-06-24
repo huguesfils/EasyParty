@@ -12,7 +12,7 @@ import AuthenticationServices
 import CloudDBClient
 import SharedDomain
 
-protocol FirebaseAuthService {
+public protocol FirebaseAuthService {
     func loginWithEmail(email: String, password: String) async -> Result<FirebaseUser, FirebaseAuthError>
     
     func registerWithEmail(email: String, password: String, fullname: String) async -> Result<FirebaseUser, FirebaseAuthError>
@@ -49,7 +49,7 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
     func registerWithEmail(email: String, password: String, fullname: String) async -> Result<FirebaseUser, FirebaseAuthError> {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
-            let user = User(id: result.user.uid, fullname: fullname, email: email, connectionType: .email)
+            let user = SharedDomain.User(id: result.user.uid, fullname: fullname, email: email, connectionType: .email)
             let id = result.user.uid
             
             try await setUserData(user: user)
@@ -80,13 +80,12 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
                 let formattedFullName = [givenName, familyName].compactMap { $0 }
                     .joined(separator: " ")
                 
-                let user = User(id: result.user.uid, fullname: formattedFullName, email: email, connectionType: .apple)
+                let user = SharedDomain.User(id: result.user.uid, fullname: formattedFullName, email: email, connectionType: .apple)
                 
                 try await setUserData(user: user)
                 
                 return await .success(try fetchUserData(id))
             }
-            
         } catch {
             let authError = AuthErrorCode.Code(rawValue: (error as NSError).code)
             return .failure(FirebaseAuthError(authErrorCode: authError ?? .userNotFound))
@@ -106,7 +105,7 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
                 return .success(user)
             } catch {
                 let result = try await Auth.auth().signIn(with: credential)
-                let user = User(
+                let user = SharedDomain.User(
                     id: result.user.uid,
                     fullname: result.user.displayName ?? "",
                     email: result.user.email ?? "",
@@ -182,13 +181,14 @@ struct DefaultFirebaseAuthService: FirebaseAuthService {
         }
     }
     
-    private func setUserData(user: User) async throws {
+    private func setUserData(user: SharedDomain.User) async throws {
         try await cloudDbClient.create(user, table: .users)
     }
     
     private func deleteUserData(_ id: String) async throws {
         try await cloudDbClient.delete(table: .users, id: id)
     }
+    
 }
 
 extension Date {

@@ -7,6 +7,7 @@
 
 import PhotosUI
 import SwiftUI
+import SharedDomain
 
 struct SettingsView: View {
     @ObservedObject var viewModel: SettingsViewModel

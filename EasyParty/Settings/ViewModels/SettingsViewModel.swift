@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import SharedDomain
+import Auth
 
 final class SettingsViewModel: ObservableObject {
     let signOutUseCase: SignOutUseCase

@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct AppInjector {
-    static let shared = AppInjector()
-    let appleService = DefaultAppleSignInService()
-    let googleService = DefaultGoogleSignInService()
+public struct AppInjector {
+    public static let shared = AppInjector()
+    public var appleService: AppleSignInService = { DefaultAppleSignInService() }()
+    public let googleService: GoogleSignInService = { DefaultGoogleSignInService() }()
 }

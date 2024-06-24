@@ -15,10 +15,18 @@ public enum ConnectionType: Codable{
 
 public struct User: Identifiable, Codable, Equatable {
     public let id: String
-    let fullname: String
-    let email: String
-    var imageUrl: String?
-    var connectionType: ConnectionType
+    public let fullname: String
+    public let email: String
+    public var imageUrl: String?
+    public var connectionType: ConnectionType
+    
+    public init(id: String, fullname: String, email: String, imageUrl: String? = nil, connectionType: ConnectionType) {
+        self.id = id
+        self.fullname = fullname
+        self.email = email
+        self.imageUrl = imageUrl
+        self.connectionType = connectionType
+    }
 }
 
 public extension User {

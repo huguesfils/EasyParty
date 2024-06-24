@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SharedDomain
 
 struct PartyListView: View {
     @State private var isShowingSettings = false

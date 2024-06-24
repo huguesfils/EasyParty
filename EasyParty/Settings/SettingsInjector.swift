@@ -7,18 +7,15 @@
 
 import Foundation
 import CloudDBClient
+import Auth
 
 struct SettingsInjector {
     private static func cloudDBClient() -> CloudDBClient {
               return DefaultCloudDBClient()
           }
     
-    private static func service() -> FirebaseAuthService {
-        return DefaultFirebaseAuthService(cloudDbClient: cloudDBClient())
-    }
-    
     private static func repository() -> UserRepository {
-        return DefaultUserRepository(authService: service())
+        return DefaultUserRepository(authService: AuthInjector.authService())
     }
     
     static func signOut() -> SignOutUseCase {

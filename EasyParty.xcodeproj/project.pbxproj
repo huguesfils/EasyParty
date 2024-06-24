@@ -306,7 +306,6 @@
 				BBC178832BFE220200FE8FB7 /* Root */,
 				BB4969F42C1735EE002670AD /* PartyLists */,
 				BB60E6332C07661000D77BD4 /* Settings */,
-				BBC178BB2BFE447F00FE8FB7 /* Shared */,
 			);
 			path = EasyParty;
 			sourceTree = "<group>";
@@ -356,13 +355,6 @@
 				BB60E62B2C075BE600D77BD4 /* Views */,
 			);
 			path = Root;
-			sourceTree = "<group>";
-		};
-		BBC178BB2BFE447F00FE8FB7 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Shared;
 			sourceTree = "<group>";
 		};
 		BBC178D42BFE44E100FE8FB7 /* Fonts */ = {

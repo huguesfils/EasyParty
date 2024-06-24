@@ -9,20 +9,20 @@ import Foundation
 import GoogleSignIn
 import Firebase
 
-enum GoogleSignInError: Error {
+public enum GoogleSignInError: Error {
     case noRootViewController
     case noIdToken
     case unknow
 }
 
-struct GoogleSignInUser {
+public struct GoogleSignInUser {
     let idToken: String
     let accessToken: String
     let email: String?
     let fullName: String?
 }
 
-protocol GoogleSignInService {
+public protocol GoogleSignInService {
     func signIn() async -> Result<GoogleSignInUser, GoogleSignInError>
 }
 

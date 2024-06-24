@@ -7,8 +7,9 @@
 
 import Foundation
 import CloudDBClient
+import FirebaseCore
 
-struct AuthInjector {
+public struct AuthInjector {
     private static func cloudDBClient() -> CloudDBClient {
             return DefaultCloudDBClient()
         }
@@ -47,5 +48,17 @@ struct AuthInjector {
     
     static func resetPasswordUseCase() -> ResetPasswordUseCase {
         return DefaultResetPasswordUseCase(repository: repository())
+    }
+    
+    public static func register() {
+        FirebaseApp.configure()
+    }
+    
+    public static func getLoginView() -> LoginView {
+        return LoginView(viewModel: .init(loginWithEmailUseCase: AuthInjector.loginWithEmailUseCase(), registerWithEmailUseCase: AuthInjector.registerWithEmailUseCase(), loginWithAppleUseCase: AuthInjector.loginWithAppleUseCase(), buttonLoginInWithAppleUseCase: AuthInjector.buttonLoginInWithAppleUseCase(), loginWithGoogleUseCase: AuthInjector.loginWithGoogle(), getGoogleCredentialsUseCase: AuthInjector.getGoogleCredentialsUseCase(), resetPasswordUseCase: AuthInjector.resetPasswordUseCase()))
+    }
+    
+    public static func authService() -> FirebaseAuthService {
+        return DefaultFirebaseAuthService(cloudDbClient: cloudDBClient())
     }
 }
