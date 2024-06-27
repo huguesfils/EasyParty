@@ -68,7 +68,7 @@ struct TermsAndConditionsView: View {
             }
             .padding()
         }
-        .background(.customBackground)
+        .background(Color.ds.customBackground)
         .navigationBarTitle("Termes et Conditions", displayMode: .inline)
     }
 }

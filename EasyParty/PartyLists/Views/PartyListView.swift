@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SharedDomain
+import Settings
 
 struct PartyListView: View {
     @State private var isShowingSettings = false
@@ -38,7 +39,7 @@ struct PartyListView: View {
             .sheet(isPresented: $isShowingSettings) {
                 
                 if let data = UserDefaults.standard.object(forKey: "currentUser") as? Data, let user = try? JSONDecoder().decode(User.self, from: data) {
-                    SettingsView(viewModel: SettingsViewModel(user: user, signOutUseCase: SettingsInjector.signOut(), deleteAccountUseCase: SettingsInjector.deleteAccountUseCase(), comfirmAppleSignInUseCase: SettingsInjector.comfirmAppleSignInUseCase()))
+                    SettingsInjector.getSettingsView(user)
                 }
             }
         }

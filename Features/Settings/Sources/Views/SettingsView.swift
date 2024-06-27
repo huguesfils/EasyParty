@@ -9,7 +9,7 @@ import PhotosUI
 import SwiftUI
 import SharedDomain
 
-struct SettingsView: View {
+public struct SettingsView: View {
     @ObservedObject var viewModel: SettingsViewModel
     @State private var showingDeleteAlert = false
     @State private var showingAppleSignInAlert = false
@@ -20,7 +20,7 @@ struct SettingsView: View {
     @State private var navigateToTerms = false
     @State private var showingShareSheet = false
     
-    var body: some View {
+    public var body: some View {
         NavigationStack {
             VStack {
                 Text(viewModel.user.fullname)
@@ -40,7 +40,7 @@ struct SettingsView: View {
                                     .foregroundStyle(.black)
                                 Spacer()
                                 Image(systemName: "chevron.right")
-                                    .foregroundStyle(.flamingo)
+                                    .foregroundStyle(Color.ds.flamingo)
                             }
                         }
                         .sheet(isPresented: $showingShareSheet) {
@@ -57,7 +57,7 @@ struct SettingsView: View {
                                     .foregroundStyle(.black)
                                 Spacer()
                                 Image(systemName: "chevron.right")
-                                    .foregroundStyle(.flamingo)
+                                    .foregroundStyle(Color.ds.flamingo)
                             }
                         }
                         
@@ -88,7 +88,7 @@ struct SettingsView: View {
                     .scrollDisabled(true)
                 }
             }
-            .background(.customBackground)
+            .background(Color.ds.customBackground)
             .actionSheet(isPresented: $showingDeleteAlert) {
                 ActionSheet(
                     title: Text("Confirmez la suppression"),
@@ -122,7 +122,7 @@ struct SettingsView: View {
                 trailing: Button("Fermer") {
                     dismiss()
                 }
-                    .foregroundStyle(.flamingo)
+                    .foregroundStyle(Color.ds.flamingo)
                     .fontWeight(.bold)
             )
             .navigationDestination(isPresented: $navigateToTerms) {
@@ -134,7 +134,7 @@ struct SettingsView: View {
     @ViewBuilder
     private func AppleSignInAlertView(viewModel: SettingsViewModel) -> some View {
         ZStack{
-            Color.customBackground.edgesIgnoringSafeArea(.all)
+            Color.ds.customBackground.edgesIgnoringSafeArea(.all)
             VStack {
                 Text("Pour supprimer votre compte, merci de vous reconnecter.")
                     .padding()

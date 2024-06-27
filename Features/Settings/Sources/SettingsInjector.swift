@@ -7,12 +7,13 @@
 
 import Foundation
 import CloudDBClient
+import SharedDomain
 import Auth
 
-struct SettingsInjector {
+public struct SettingsInjector {
     private static func cloudDBClient() -> CloudDBClient {
-              return DefaultCloudDBClient()
-          }
+        return DefaultCloudDBClient()
+    }
     
     private static func repository() -> UserRepository {
         return DefaultUserRepository(authService: AuthInjector.authService())
@@ -28,5 +29,9 @@ struct SettingsInjector {
     
     static func comfirmAppleSignInUseCase() -> ComfirmAppleSignInUseCase {
         return DefaultComfirmAppleSignInUseCase(repository: repository(), appleSignInService: AppInjector.shared.appleService)
+    }
+    
+    public static func getSettingsView(_ user: User) -> SettingsView {
+        return  SettingsView(viewModel: SettingsViewModel(user: user, signOutUseCase: SettingsInjector.signOut(), deleteAccountUseCase: SettingsInjector.deleteAccountUseCase(), comfirmAppleSignInUseCase: SettingsInjector.comfirmAppleSignInUseCase()))
     }
 }

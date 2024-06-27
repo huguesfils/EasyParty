@@ -7,19 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BB0EA6F92C0CBAF300C6A422 /* DeleteAccountUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0EA6F82C0CBAF300C6A422 /* DeleteAccountUseCase.swift */; };
-		BB1DD7F22C087FD5004E5CAC /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1DD7F12C087FD5004E5CAC /* SettingsViewModel.swift */; };
 		BB4969FC2C173657002670AD /* PartyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4969FB2C173657002670AD /* PartyListView.swift */; };
 		BB4969FE2C17367B002670AD /* InviteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4969FD2C17367B002670AD /* InviteListView.swift */; };
 		BB496A012C173698002670AD /* AddPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB496A002C173698002670AD /* AddPartyView.swift */; };
-		BB496A032C173C90002670AD /* TermsAndConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB496A022C173C90002670AD /* TermsAndConditionsView.swift */; };
 		BB60E62F2C075C1400D77BD4 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB60E62D2C075C1400D77BD4 /* TabBarView.swift */; };
 		BB60E6302C075C1400D77BD4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB60E62E2C075C1400D77BD4 /* ContentView.swift */; };
 		BB60E6322C07609000D77BD4 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB60E6312C07609000D77BD4 /* ContentViewModel.swift */; };
-		BB60E6372C07665000D77BD4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB60E6362C07665000D77BD4 /* SettingsView.swift */; };
+		BB61456C2C2DAB98003B4F48 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = BB61456B2C2DAB98003B4F48 /* Settings */; };
 		BB6E85F72C21E3DB00D2FBC0 /* CloudDBClient in Frameworks */ = {isa = PBXBuildFile; productRef = BB6E85F62C21E3DA00D2FBC0 /* CloudDBClient */; };
 		BB6E85FD2C22012700D2FBC0 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = BB6E85FC2C22012700D2FBC0 /* Auth */; };
-		BBA3CAD12C078C4C00C5B21D /* SignOutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA3CAD02C078C4C00C5B21D /* SignOutUseCase.swift */; };
 		BBC178592BFE210800FE8FB7 /* EasyPartyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC178582BFE210800FE8FB7 /* EasyPartyApp.swift */; };
 		BBC1785D2BFE210900FE8FB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBC1785C2BFE210900FE8FB7 /* Assets.xcassets */; };
 		BBC178602BFE210900FE8FB7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBC1785F2BFE210900FE8FB7 /* Preview Assets.xcassets */; };
@@ -46,9 +42,6 @@
 		BBC178E52BFE44E100FE8FB7 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BBC178D12BFE44E100FE8FB7 /* Poppins-Regular.ttf */; };
 		BBC178E62BFE44E100FE8FB7 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BBC178D22BFE44E100FE8FB7 /* Poppins-SemiBold.ttf */; };
 		BBC178E72BFE44E100FE8FB7 /* Poppins-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BBC178D32BFE44E100FE8FB7 /* Poppins-SemiBoldItalic.ttf */; };
-		BBFCC3492C189FF90024FB73 /* ComfirmAppleSignInUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFCC3482C189FF90024FB73 /* ComfirmAppleSignInUseCase.swift */; };
-		BBFCC34E2C18A0FD0024FB73 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFCC34D2C18A0FD0024FB73 /* UserRepository.swift */; };
-		BBFCC3502C18A1C50024FB73 /* SettingsInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBFCC34F2C18A1C50024FB73 /* SettingsInjector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,22 +62,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BB0EA6F82C0CBAF300C6A422 /* DeleteAccountUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountUseCase.swift; sourceTree = "<group>"; };
-		BB1DD7F12C087FD5004E5CAC /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		BB2392F22BFFA33F00F59F68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BB2392F32BFFA37A00F59F68 /* EasyParty.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EasyParty.entitlements; sourceTree = "<group>"; };
 		BB4969FB2C173657002670AD /* PartyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyListView.swift; sourceTree = "<group>"; };
 		BB4969FD2C17367B002670AD /* InviteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteListView.swift; sourceTree = "<group>"; };
 		BB496A002C173698002670AD /* AddPartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPartyView.swift; sourceTree = "<group>"; };
-		BB496A022C173C90002670AD /* TermsAndConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsView.swift; sourceTree = "<group>"; };
 		BB60E62D2C075C1400D77BD4 /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		BB60E62E2C075C1400D77BD4 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BB60E6312C07609000D77BD4 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
-		BB60E6362C07665000D77BD4 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		BB61456A2C2DA4EF003B4F48 /* Settings */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Settings; sourceTree = "<group>"; };
 		BB6E85F42C21DCEC00D2FBC0 /* CloudDBClient */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CloudDBClient; sourceTree = "<group>"; };
 		BB6E85F92C21F13500D2FBC0 /* Auth */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Auth; sourceTree = "<group>"; };
 		BB6E85FB2C21FB7F00D2FBC0 /* SharedDomain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SharedDomain; sourceTree = "<group>"; };
-		BBA3CAD02C078C4C00C5B21D /* SignOutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutUseCase.swift; sourceTree = "<group>"; };
 		BBC178552BFE210800FE8FB7 /* EasyParty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyParty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBC178582BFE210800FE8FB7 /* EasyPartyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyPartyApp.swift; sourceTree = "<group>"; };
 		BBC1785C2BFE210900FE8FB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -114,9 +103,6 @@
 		BBC178D12BFE44E100FE8FB7 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		BBC178D22BFE44E100FE8FB7 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		BBC178D32BFE44E100FE8FB7 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		BBFCC3482C189FF90024FB73 /* ComfirmAppleSignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComfirmAppleSignInUseCase.swift; sourceTree = "<group>"; };
-		BBFCC34D2C18A0FD0024FB73 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
-		BBFCC34F2C18A1C50024FB73 /* SettingsInjector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInjector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB61456C2C2DAB98003B4F48 /* Settings in Frameworks */,
 				BB6E85FD2C22012700D2FBC0 /* Auth in Frameworks */,
 				BB6E85F72C21E3DB00D2FBC0 /* CloudDBClient in Frameworks */,
 			);
@@ -146,14 +133,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BB1DD7F32C08804E004E5CAC /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				BB1DD7F12C087FD5004E5CAC /* SettingsViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		BB4969F42C1735EE002670AD /* PartyLists */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,27 +208,6 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		BB60E6332C07661000D77BD4 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				BBFCC34C2C18A0ED0024FB73 /* Data */,
-				BBFCC34A2C18A06C0024FB73 /* Domain */,
-				BB1DD7F32C08804E004E5CAC /* ViewModels */,
-				BB60E6342C07661C00D77BD4 /* Views */,
-				BBFCC34F2C18A1C50024FB73 /* SettingsInjector.swift */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
-		BB60E6342C07661C00D77BD4 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				BB60E6362C07665000D77BD4 /* SettingsView.swift */,
-				BB496A022C173C90002670AD /* TermsAndConditionsView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		BB6E85F22C21D2DE00D2FBC0 /* TechLibs */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,6 +227,7 @@
 		BB6E85F82C21F0F400D2FBC0 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				BB61456A2C2DA4EF003B4F48 /* Settings */,
 				BB6E85F92C21F13500D2FBC0 /* Auth */,
 			);
 			path = Features;
@@ -305,7 +264,6 @@
 				BBC178822BFE21E800FE8FB7 /* Core */,
 				BBC178832BFE220200FE8FB7 /* Root */,
 				BB4969F42C1735EE002670AD /* PartyLists */,
-				BB60E6332C07661000D77BD4 /* Settings */,
 			);
 			path = EasyParty;
 			sourceTree = "<group>";
@@ -382,32 +340,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		BBFCC34A2C18A06C0024FB73 /* Domain */ = {
-			isa = PBXGroup;
-			children = (
-				BBFCC34B2C18A0730024FB73 /* UseCases */,
-			);
-			path = Domain;
-			sourceTree = "<group>";
-		};
-		BBFCC34B2C18A0730024FB73 /* UseCases */ = {
-			isa = PBXGroup;
-			children = (
-				BBFCC3482C189FF90024FB73 /* ComfirmAppleSignInUseCase.swift */,
-				BB0EA6F82C0CBAF300C6A422 /* DeleteAccountUseCase.swift */,
-				BBA3CAD02C078C4C00C5B21D /* SignOutUseCase.swift */,
-			);
-			path = UseCases;
-			sourceTree = "<group>";
-		};
-		BBFCC34C2C18A0ED0024FB73 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				BBFCC34D2C18A0FD0024FB73 /* UserRepository.swift */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -427,6 +359,7 @@
 			packageProductDependencies = (
 				BB6E85F62C21E3DA00D2FBC0 /* CloudDBClient */,
 				BB6E85FC2C22012700D2FBC0 /* Auth */,
+				BB61456B2C2DAB98003B4F48 /* Settings */,
 			);
 			productName = EasyParty;
 			productReference = BBC178552BFE210800FE8FB7 /* EasyParty.app */;
@@ -567,18 +500,10 @@
 			files = (
 				BB60E62F2C075C1400D77BD4 /* TabBarView.swift in Sources */,
 				BBC178592BFE210800FE8FB7 /* EasyPartyApp.swift in Sources */,
-				BB496A032C173C90002670AD /* TermsAndConditionsView.swift in Sources */,
 				BB60E6302C075C1400D77BD4 /* ContentView.swift in Sources */,
 				BB4969FC2C173657002670AD /* PartyListView.swift in Sources */,
-				BBA3CAD12C078C4C00C5B21D /* SignOutUseCase.swift in Sources */,
-				BB0EA6F92C0CBAF300C6A422 /* DeleteAccountUseCase.swift in Sources */,
-				BB1DD7F22C087FD5004E5CAC /* SettingsViewModel.swift in Sources */,
 				BB496A012C173698002670AD /* AddPartyView.swift in Sources */,
-				BB60E6372C07665000D77BD4 /* SettingsView.swift in Sources */,
-				BBFCC34E2C18A0FD0024FB73 /* UserRepository.swift in Sources */,
 				BB60E6322C07609000D77BD4 /* ContentViewModel.swift in Sources */,
-				BBFCC3492C189FF90024FB73 /* ComfirmAppleSignInUseCase.swift in Sources */,
-				BBFCC3502C18A1C50024FB73 /* SettingsInjector.swift in Sources */,
 				BB4969FE2C17367B002670AD /* InviteListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -921,6 +846,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		BB61456B2C2DAB98003B4F48 /* Settings */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Settings;
+		};
 		BB6E85F62C21E3DA00D2FBC0 /* CloudDBClient */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CloudDBClient;
