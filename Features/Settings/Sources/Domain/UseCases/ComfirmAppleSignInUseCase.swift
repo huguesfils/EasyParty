@@ -22,20 +22,24 @@ struct DefaultComfirmAppleSignInUseCase: ComfirmAppleSignInUseCase {
         return appleSignInService.confirmSignInButton { result in
             switch result {
             case .success(let authorizationCode):
+                print("sucess")
                 Task {
                     let deleteResult = await repository.deleteAppleAccount(authorizationCode: authorizationCode)
                     DispatchQueue.main.async {
                         switch deleteResult {
                         case .success:
+                            print("success useCase")
                             clearUserInfo()
                             
                             completion(.success(Void()))
                         case .failure:
+                            print("fail")
                             completion(.failure(.unknown))
                         }
                     }
                 }
             case .failure(let error):
+                print("failure")
                 completion(.failure(error))
             }
         }
