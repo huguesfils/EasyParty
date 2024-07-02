@@ -6,17 +6,16 @@
 //
 
 import SwiftUI
+import Parties
 
 struct TabBarView: View {
-    //  @StateObject var viewModel = PartyListViewModel()
-    
     @State var isPresenting = false
     @State private var selection = 0
     
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $selection) {
-                PartyListView()
+                PartiesInjector.getPartyListView()
                     .tabItem {
                         Label("Mes soirées", systemImage: "party.popper.fill")
                     }
@@ -28,7 +27,7 @@ struct TabBarView: View {
                     }.frame(width: 1)
                     .tag(1)
                 
-                InviteListView()
+                PartiesInjector.getInviteListView()
                     .tabItem {
                         Label("Mes invitations", systemImage: "calendar.badge.plus")
                     }
@@ -56,7 +55,7 @@ struct TabBarView: View {
             }
         }
         .sheet(isPresented: $isPresenting) {
-            AddPartyView()
+            PartiesInjector.getAddPartyView()
         }
     }
 }

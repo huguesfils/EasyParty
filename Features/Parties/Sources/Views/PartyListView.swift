@@ -9,10 +9,10 @@ import SwiftUI
 import SharedDomain
 import Settings
 
-struct PartyListView: View {
+public struct PartyListView: View {
     @State private var isShowingSettings = false
     
-    var body: some View {
+    public var body: some View {
         NavigationStack {
             VStack{
                 Spacer()
@@ -22,7 +22,7 @@ struct PartyListView: View {
                 Spacer()
             }
             .frame(maxWidth: .infinity)
-            .background(.customBackground)
+            .background(Color.ds.customBackground)
             .navigationTitle("Mes soirées")
             .navigationBarTitleDisplayMode(.automatic)
             .toolbar {

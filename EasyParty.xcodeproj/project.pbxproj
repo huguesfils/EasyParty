@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BB4969FC2C173657002670AD /* PartyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4969FB2C173657002670AD /* PartyListView.swift */; };
-		BB4969FE2C17367B002670AD /* InviteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4969FD2C17367B002670AD /* InviteListView.swift */; };
-		BB496A012C173698002670AD /* AddPartyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB496A002C173698002670AD /* AddPartyView.swift */; };
+		BB21AD032C343F7A00EF0C67 /* Parties in Frameworks */ = {isa = PBXBuildFile; productRef = BB21AD022C343F7A00EF0C67 /* Parties */; };
 		BB60E62F2C075C1400D77BD4 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB60E62D2C075C1400D77BD4 /* TabBarView.swift */; };
 		BB60E6302C075C1400D77BD4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB60E62E2C075C1400D77BD4 /* ContentView.swift */; };
 		BB60E6322C07609000D77BD4 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB60E6312C07609000D77BD4 /* ContentViewModel.swift */; };
@@ -62,11 +60,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB21AD012C343BA400EF0C67 /* Parties */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Parties; sourceTree = "<group>"; };
 		BB2392F22BFFA33F00F59F68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BB2392F32BFFA37A00F59F68 /* EasyParty.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EasyParty.entitlements; sourceTree = "<group>"; };
-		BB4969FB2C173657002670AD /* PartyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyListView.swift; sourceTree = "<group>"; };
-		BB4969FD2C17367B002670AD /* InviteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteListView.swift; sourceTree = "<group>"; };
-		BB496A002C173698002670AD /* AddPartyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPartyView.swift; sourceTree = "<group>"; };
 		BB60E62D2C075C1400D77BD4 /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		BB60E62E2C075C1400D77BD4 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BB60E6312C07609000D77BD4 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
@@ -113,6 +109,7 @@
 				BB61456C2C2DAB98003B4F48 /* Settings in Frameworks */,
 				BB6E85FD2C22012700D2FBC0 /* Auth in Frameworks */,
 				BB6E85F72C21E3DB00D2FBC0 /* CloudDBClient in Frameworks */,
+				BB21AD032C343F7A00EF0C67 /* Parties in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,64 +130,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BB4969F42C1735EE002670AD /* PartyLists */ = {
-			isa = PBXGroup;
-			children = (
-				BB4969F82C173627002670AD /* Data */,
-				BB4969F72C173620002670AD /* Domain */,
-				BB4969F62C173618002670AD /* ViewModels */,
-				BB4969F52C173612002670AD /* Views */,
-			);
-			path = PartyLists;
-			sourceTree = "<group>";
-		};
-		BB4969F52C173612002670AD /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				BB4969FB2C173657002670AD /* PartyListView.swift */,
-				BB4969FD2C17367B002670AD /* InviteListView.swift */,
-				BB496A002C173698002670AD /* AddPartyView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		BB4969F62C173618002670AD /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		BB4969F72C173620002670AD /* Domain */ = {
-			isa = PBXGroup;
-			children = (
-				BB4969FA2C17363B002670AD /* Model */,
-				BB4969F92C17362E002670AD /* UseCases */,
-			);
-			path = Domain;
-			sourceTree = "<group>";
-		};
-		BB4969F82C173627002670AD /* Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		BB4969F92C17362E002670AD /* UseCases */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UseCases;
-			sourceTree = "<group>";
-		};
-		BB4969FA2C17363B002670AD /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		BB60E62B2C075BE600D77BD4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +166,7 @@
 		BB6E85F82C21F0F400D2FBC0 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				BB21AD012C343BA400EF0C67 /* Parties */,
 				BB61456A2C2DA4EF003B4F48 /* Settings */,
 				BB6E85F92C21F13500D2FBC0 /* Auth */,
 			);
@@ -263,7 +203,6 @@
 				BB2392F22BFFA33F00F59F68 /* Info.plist */,
 				BBC178822BFE21E800FE8FB7 /* Core */,
 				BBC178832BFE220200FE8FB7 /* Root */,
-				BB4969F42C1735EE002670AD /* PartyLists */,
 			);
 			path = EasyParty;
 			sourceTree = "<group>";
@@ -360,6 +299,7 @@
 				BB6E85F62C21E3DA00D2FBC0 /* CloudDBClient */,
 				BB6E85FC2C22012700D2FBC0 /* Auth */,
 				BB61456B2C2DAB98003B4F48 /* Settings */,
+				BB21AD022C343F7A00EF0C67 /* Parties */,
 			);
 			productName = EasyParty;
 			productReference = BBC178552BFE210800FE8FB7 /* EasyParty.app */;
@@ -501,10 +441,7 @@
 				BB60E62F2C075C1400D77BD4 /* TabBarView.swift in Sources */,
 				BBC178592BFE210800FE8FB7 /* EasyPartyApp.swift in Sources */,
 				BB60E6302C075C1400D77BD4 /* ContentView.swift in Sources */,
-				BB4969FC2C173657002670AD /* PartyListView.swift in Sources */,
-				BB496A012C173698002670AD /* AddPartyView.swift in Sources */,
 				BB60E6322C07609000D77BD4 /* ContentViewModel.swift in Sources */,
-				BB4969FE2C17367B002670AD /* InviteListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -846,6 +783,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		BB21AD022C343F7A00EF0C67 /* Parties */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Parties;
+		};
 		BB61456B2C2DAB98003B4F48 /* Settings */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Settings;
