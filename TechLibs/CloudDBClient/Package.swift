@@ -13,13 +13,15 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.28.0")
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.28.0"),
+        .package(url: "https://github.com/hmlongco/Factory.git", from: "2.3.2")
     ],
     targets: [
         .target(
             name: "CloudDBClient",
             dependencies: [
-                .product(name: "FirebaseFirestore", package: "firebase-ios-sdk")
+                .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),
+                "Factory"
             ]
         ),
         .testTarget(

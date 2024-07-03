@@ -8,6 +8,7 @@
 import AuthenticationServices
 import SwiftUI
 import SharedDomain
+import Factory
 
 public struct LoginView: View {
     @ObservedObject var viewModel: AuthViewModel
@@ -67,7 +68,7 @@ public struct LoginView: View {
             .cornerRadius(10)
             .buttonStyle(.bordered)
             
-            NavigationLink(destination: MailLoginView(viewModel: .init(loginWithEmailUseCase: AuthInjector.loginWithEmailUseCase(), registerWithEmailUseCase: AuthInjector.registerWithEmailUseCase(), loginWithAppleUseCase: AuthInjector.loginWithAppleUseCase(), buttonLoginInWithAppleUseCase: AuthInjector.buttonLoginInWithAppleUseCase(), loginWithGoogleUseCase: AuthInjector.loginWithGoogle(), getGoogleCredentialsUseCase: AuthInjector.getGoogleCredentialsUseCase(), resetPasswordUseCase: AuthInjector.resetPasswordUseCase()))) {
+            NavigationLink(destination: MailLoginView(viewModel: .init())) {
                 Label("Continuer avec l'email", systemImage: "envelope")
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -81,6 +82,5 @@ public struct LoginView: View {
 }
 
 #Preview {
-    LoginView(viewModel: .init(loginWithEmailUseCase: AuthInjector.loginWithEmailUseCase(), registerWithEmailUseCase: AuthInjector.registerWithEmailUseCase(), loginWithAppleUseCase: AuthInjector.loginWithAppleUseCase(), buttonLoginInWithAppleUseCase: AuthInjector.buttonLoginInWithAppleUseCase(), loginWithGoogleUseCase: AuthInjector.loginWithGoogle(), getGoogleCredentialsUseCase: AuthInjector.getGoogleCredentialsUseCase(), resetPasswordUseCase: AuthInjector.resetPasswordUseCase()))
+    LoginView(viewModel: .init())
 }
-        

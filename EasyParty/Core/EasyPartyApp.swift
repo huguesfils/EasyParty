@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Auth
+import Factory
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     
@@ -14,8 +15,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
-        
-        AuthInjector.register()
         
         return true
     }

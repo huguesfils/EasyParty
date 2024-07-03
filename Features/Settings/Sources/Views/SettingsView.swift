@@ -151,5 +151,5 @@ public struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(viewModel: SettingsViewModel(user: User.mock, signOutUseCase: SettingsInjector.signOut(), deleteAccountUseCase: SettingsInjector.deleteAccountUseCase(), comfirmAppleSignInUseCase: SettingsInjector.comfirmAppleSignInUseCase()))
+    SettingsView(viewModel: .init(user: User.mock))
 }

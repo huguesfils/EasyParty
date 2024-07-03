@@ -31,6 +31,7 @@ public protocol FirebaseAuthService {
 }
 
 struct DefaultFirebaseAuthService: FirebaseAuthService {
+    
     let cloudDbClient: CloudDBClient
     
     func loginWithEmail(email: String, password: String) async -> Result<

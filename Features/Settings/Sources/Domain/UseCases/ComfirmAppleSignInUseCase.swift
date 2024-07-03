@@ -15,7 +15,6 @@ protocol ComfirmAppleSignInUseCase {
 struct DefaultComfirmAppleSignInUseCase: ComfirmAppleSignInUseCase {
     
     let repository: UserRepository
-    
     let appleSignInService: AppleSignInService
     
     func execute(completion: @escaping (Result<Void, AppleSignInError>) -> Void) -> AppleSignInButton {

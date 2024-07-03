@@ -9,29 +9,27 @@ import Foundation
 import CloudDBClient
 import SharedDomain
 import Auth
+import Factory
 
-public struct SettingsInjector {
-    private static func cloudDBClient() -> CloudDBClient {
-        return DefaultCloudDBClient()
+extension Container {
+    
+    var repository: Factory<UserRepository> {
+        self { DefaultUserRepository(authService: self.service.resolve()) }
     }
     
-    private static func repository() -> UserRepository {
-        return DefaultUserRepository(authService: AuthInjector.authService())
+    var signOutUseCase: Factory<SignOutUseCase> {
+        self { DefaultSignOutUseCase(repository: self.repository.resolve()) }
     }
     
-    static func signOut() -> SignOutUseCase {
-        return DefaultSignOutUseCase(repository: repository())
+    var deleteAccountUseCase: Factory<DeleteAccountUseCase> {
+        self { DefaultDeleteAccountUseCase(repository: self.repository.resolve()) }
     }
     
-    static func deleteAccountUseCase() -> DeleteAccountUseCase {
-        return DefaultDeleteAccountUseCase(repository: repository())
-    }
-    
-    static func comfirmAppleSignInUseCase() -> ComfirmAppleSignInUseCase {
-        return DefaultComfirmAppleSignInUseCase(repository: repository(), appleSignInService: AppInjector.shared.appleService)
+    var comfirmAppleSignInUseCase: Factory<ComfirmAppleSignInUseCase> {
+        self { DefaultComfirmAppleSignInUseCase(repository: self.repository.resolve(), appleSignInService: AppInjector.shared.appleService) }
     }
     
     public static func getSettingsView(_ user: User) -> SettingsView {
-        return  SettingsView(viewModel: SettingsViewModel(user: user, signOutUseCase: SettingsInjector.signOut(), deleteAccountUseCase: SettingsInjector.deleteAccountUseCase(), comfirmAppleSignInUseCase: SettingsInjector.comfirmAppleSignInUseCase()))
+        return  SettingsView(viewModel: .init(user: user))
     }
 }

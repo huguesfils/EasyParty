@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SharedDomain
+import Factory
 
 protocol AuthenticationFormProtocol {
     var formIsValid: Bool { get }
@@ -14,13 +15,14 @@ protocol AuthenticationFormProtocol {
 
 final class AuthViewModel: ObservableObject {
    
-    let loginWithEmailUseCase: LoginWithEmailUseCase
-    let registerWithEmailUseCase: RegisterWithEmailUseCase
-    let loginWithAppleUseCase: LoginWithAppleUseCase
-    let buttonLoginInWithAppleUseCase: ButtonLoginInWithAppleUseCase
-    let loginWithGoogleUseCase: LoginWithGoogleUseCase
-    let getGoogleCredentialsUseCase: GetGoogleCredentialsUseCase
-    let resetPAsswordUseCase: ResetPasswordUseCase
+    @Injected(\.loginWithEmailUseCase) var loginWithEmailUseCase: LoginWithEmailUseCase
+    @Injected(\.registerWithEmailUseCase) var registerWithEmailUseCase: RegisterWithEmailUseCase
+    @Injected(\.loginWithAppleUseCase) var loginWithAppleUseCase: LoginWithAppleUseCase
+    @Injected(\.buttonLoginInWithAppleUseCase) var buttonLoginInWithAppleUseCase: ButtonLoginInWithAppleUseCase
+    @Injected(\.loginWithGoogleUseCase) var loginWithGoogleUseCase: LoginWithGoogleUseCase
+    @Injected(\.getGoogleCredentialsUseCase) var getGoogleCredentialsUseCase: GetGoogleCredentialsUseCase
+    @Injected(\.resetPasswordUseCase) var resetPasswordUseCase: ResetPasswordUseCase
+    //TODO injector & specific viewmodel
     
     @Published var email: String = ""
     @Published var password: String = ""
@@ -29,16 +31,6 @@ final class AuthViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var hasError: Error? = nil
     @Published var showAlert: Bool = false
-
-    init(loginWithEmailUseCase: LoginWithEmailUseCase, registerWithEmailUseCase: RegisterWithEmailUseCase, loginWithAppleUseCase: LoginWithAppleUseCase, buttonLoginInWithAppleUseCase: ButtonLoginInWithAppleUseCase, loginWithGoogleUseCase: LoginWithGoogleUseCase, getGoogleCredentialsUseCase: GetGoogleCredentialsUseCase, resetPasswordUseCase: ResetPasswordUseCase) {
-        self.loginWithEmailUseCase = loginWithEmailUseCase
-        self.registerWithEmailUseCase = registerWithEmailUseCase
-        self.loginWithAppleUseCase = loginWithAppleUseCase
-        self.buttonLoginInWithAppleUseCase = buttonLoginInWithAppleUseCase
-        self.loginWithGoogleUseCase = loginWithGoogleUseCase
-        self.getGoogleCredentialsUseCase = getGoogleCredentialsUseCase
-        self.resetPAsswordUseCase = resetPasswordUseCase
-    }
     
     @ViewBuilder
     func getAppleSignInButton() -> AppleSignInButton {
@@ -101,7 +93,7 @@ final class AuthViewModel: ObservableObject {
     @MainActor
     func resetPassword() async {
         isLoading = true
-        let result = await resetPAsswordUseCase.execute(email: email)
+        let result = await resetPasswordUseCase.execute(email: email)
         isLoading = false
         switch result {
         case .success(_):

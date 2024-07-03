@@ -13,25 +13,25 @@ public protocol CloudDBClient {
     func create<T: Encodable & Identifiable>(_ encodableType: T, table: CloudDBTable) async throws where T.ID == String
 }
 
-public struct DefaultCloudDBClient: CloudDBClient {
-    public init() {}
+struct DefaultCloudDBClient: CloudDBClient {
     
-    public func fetch<T: Decodable>(_ decodableType: T.Type, table: CloudDBTable, id: String) async -> Result<T, Error> {
+    private let firestore = Firestore.firestore()
+    
+    func fetch<T: Decodable>(_ decodableType: T.Type, table: CloudDBTable, id: String) async -> Result<T, Error> {
         do {
-            let documentSnapshot = try await Firestore.firestore().collection(table.rawValue).document(id).getDocument()
-            
+            let documentSnapshot = try await firestore.collection(table.rawValue).document(id).getDocument()
             return .success(try documentSnapshot.data(as: decodableType))
         } catch {
             return .failure(error)
         }
     }
     
-    public func delete(table: CloudDBTable, id: String) async throws {
-        try await Firestore.firestore().collection(table.rawValue).document(id).delete()
+    func delete(table: CloudDBTable, id: String) async throws {
+        try await firestore.collection(table.rawValue).document(id).delete()
     }
     
-    public func create<T: Encodable & Identifiable>(_ encodable: T, table: CloudDBTable) async throws where T.ID == String {
+    func create<T: Encodable & Identifiable>(_ encodable: T, table: CloudDBTable) async throws where T.ID == String {
         let encodedData = try Firestore.Encoder().encode(encodable)
-        try await Firestore.firestore().collection(table.rawValue).document(encodable.id).setData(encodedData, merge: true)
+        try await firestore.collection(table.rawValue).document(encodable.id).setData(encodedData, merge: true)
     }
 }

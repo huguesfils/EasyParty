@@ -8,46 +8,44 @@
 import Foundation
 import CloudDBClient
 import FirebaseCore
+import Factory
 
-public struct AuthInjector {
-    private static func cloudDBClient() -> CloudDBClient {
-            return DefaultCloudDBClient()
-        }
+extension Container {
     
-    private static func service() -> FirebaseAuthService {
-        return DefaultFirebaseAuthService(cloudDbClient: cloudDBClient())
+    public var service: Factory<FirebaseAuthService> {
+        self { DefaultFirebaseAuthService(cloudDbClient: self.cloudDBClient.resolve()) }
     }
     
-    private static func repository() -> AuthRepository {
-        return DefaultAuthRepository(authService: service())
+    var repository: Factory<AuthRepository> {
+        self { DefaultAuthRepository(authService: self.service.resolve()) }
     }
     
-    static func loginWithEmailUseCase() -> LoginWithEmailUseCase {
-        return DefaultLoginWithEmailUseCase(repository: repository())
+    var loginWithEmailUseCase: Factory<LoginWithEmailUseCase> {
+        self { DefaultLoginWithEmailUseCase(repository: self.repository.resolve()) }
     }
     
-    static func registerWithEmailUseCase() -> RegisterWithEmailUseCase {
-        return DefaultRegisterWithEmailUseCase(repository: repository())
+    var registerWithEmailUseCase: Factory<RegisterWithEmailUseCase> {
+        self { DefaultRegisterWithEmailUseCase(repository: self.repository.resolve()) }
     }
     
-    static func buttonLoginInWithAppleUseCase() -> ButtonLoginInWithAppleUseCase {
-        return DefaultButtonLoginInWithAppleUseCase(appleSignInService: AppInjector.shared.appleService)
+    var buttonLoginInWithAppleUseCase: Factory<ButtonLoginInWithAppleUseCase> {
+        self { DefaultButtonLoginInWithAppleUseCase(appleSignInService: AppInjector.shared.appleService) }
     }
     
-    static func loginWithAppleUseCase() -> LoginWithAppleUseCase {
-        return DefaultLoginWithAppleUseCase(repository: repository())
+    var loginWithAppleUseCase: Factory<LoginWithAppleUseCase> {
+        self { DefaultLoginWithAppleUseCase(repository: self.repository.resolve()) }
     }
     
-    static func getGoogleCredentialsUseCase() -> GetGoogleCredentialsUseCase {
-        return DefaultGetGoogleCredentialsUseCase(googleService: AppInjector.shared.googleService)
+    var getGoogleCredentialsUseCase: Factory<GetGoogleCredentialsUseCase> {
+        self { DefaultGetGoogleCredentialsUseCase(googleService: AppInjector.shared.googleService) }
     }
     
-    static func loginWithGoogle() -> LoginWithGoogleUseCase {
-        return DefaultLoginWithGoogleUseCase(repository: repository())
+    var loginWithGoogleUseCase: Factory<LoginWithGoogleUseCase> {
+        self { DefaultLoginWithGoogleUseCase(repository: self.repository.resolve()) }
     }
     
-    static func resetPasswordUseCase() -> ResetPasswordUseCase {
-        return DefaultResetPasswordUseCase(repository: repository())
+    var resetPasswordUseCase: Factory<ResetPasswordUseCase> {
+        self { DefaultResetPasswordUseCase(repository: self.repository.resolve()) }
     }
     
     public static func register() {
@@ -55,10 +53,10 @@ public struct AuthInjector {
     }
     
     public static func getLoginView() -> LoginView {
-        return LoginView(viewModel: .init(loginWithEmailUseCase: AuthInjector.loginWithEmailUseCase(), registerWithEmailUseCase: AuthInjector.registerWithEmailUseCase(), loginWithAppleUseCase: AuthInjector.loginWithAppleUseCase(), buttonLoginInWithAppleUseCase: AuthInjector.buttonLoginInWithAppleUseCase(), loginWithGoogleUseCase: AuthInjector.loginWithGoogle(), getGoogleCredentialsUseCase: AuthInjector.getGoogleCredentialsUseCase(), resetPasswordUseCase: AuthInjector.resetPasswordUseCase()))
+        return LoginView(viewModel: .init())
     }
     
-    public static func authService() -> FirebaseAuthService {
-        return DefaultFirebaseAuthService(cloudDbClient: cloudDBClient())
+    var authService: Factory<FirebaseAuthService> {
+        self { DefaultFirebaseAuthService(cloudDbClient: self.cloudDBClient.resolve()) }.singleton
     }
 }

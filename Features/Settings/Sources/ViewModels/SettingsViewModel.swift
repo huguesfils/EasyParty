@@ -8,22 +8,17 @@
 import SwiftUI
 import SharedDomain
 import Auth
+import Factory
 
 final class SettingsViewModel: ObservableObject {
-    let signOutUseCase: SignOutUseCase
-    let deleteAccountUseCase: DeleteAccountUseCase
-    let comfirmAppleSignInUseCase: ComfirmAppleSignInUseCase
+    @Injected(\.signOutUseCase) var signOutUseCase: SignOutUseCase
+    @Injected(\.deleteAccountUseCase) var deleteAccountUseCase: DeleteAccountUseCase
+    @Injected(\.comfirmAppleSignInUseCase) var comfirmAppleSignInUseCase: ComfirmAppleSignInUseCase
     
     @Published var user: User
     
-    init(user: User,
-         signOutUseCase: SignOutUseCase,
-         deleteAccountUseCase: DeleteAccountUseCase,
-         comfirmAppleSignInUseCase: ComfirmAppleSignInUseCase) {
+    init(user: User) {
         self.user = user
-        self.signOutUseCase = signOutUseCase
-        self.deleteAccountUseCase = deleteAccountUseCase
-        self.comfirmAppleSignInUseCase = comfirmAppleSignInUseCase
     }
     
     
