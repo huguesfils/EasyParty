@@ -10,7 +10,7 @@ import SwiftUI
 import SharedDomain
 
 public struct SettingsView: View {
-    @ObservedObject var viewModel: SettingsViewModel
+    @StateObject private var viewModel: SettingsViewModel
     @State private var showingDeleteAlert = false
     @State private var showingAppleSignInAlert = false
     @Environment(\.dismiss) var dismiss
@@ -19,6 +19,10 @@ public struct SettingsView: View {
     @State private var isImageLoading = false
     @State private var navigateToTerms = false
     @State private var showingShareSheet = false
+    
+    public init(user: User) {
+        _viewModel = .init(wrappedValue: .init(user: user))
+    }
     
     public var body: some View {
         NavigationStack {
@@ -151,5 +155,5 @@ public struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(viewModel: .init(user: User.mock))
+    SettingsView(user: User.mock)
 }

@@ -10,7 +10,7 @@ import SharedDomain
 
 struct ResetPasswordView: View {
 
-  @ObservedObject var viewModel: AuthViewModel
+  @ObservedObject var viewModel: ResetPasswordViewModel
 
   @Environment(\.dismiss) private var dismiss
 
@@ -45,22 +45,15 @@ struct ResetPasswordView: View {
                 .frame(maxWidth: .infinity, minHeight: 48)
                 .background(Color.ds.flamingo)
                 .cornerRadius(50)
-                .opacity(formIsValid ? 1.0 : 0.5)
+                .opacity(viewModel.formIsValid ? 1.0 : 0.5)
             }
-            .disabled(!formIsValid)
+            .disabled(!viewModel.formIsValid)
 
           }
 
         }.padding()
       }
     }
-  }
-}
-
-extension ResetPasswordView: AuthenticationFormProtocol {
-  var formIsValid: Bool {
-    return !viewModel.email.isEmpty
-      && viewModel.email.contains("@")
   }
 }
 

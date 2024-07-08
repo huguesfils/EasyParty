@@ -14,7 +14,7 @@ private enum FocusableField: Hashable {
 }
 
 struct MailLoginView: View {
-  @ObservedObject var viewModel: AuthViewModel
+  @ObservedObject var viewModel: MailLoginViewModel
   @FocusState private var focus: FocusableField?
 
   var body: some View {
@@ -69,9 +69,9 @@ struct MailLoginView: View {
                     .frame(maxWidth: .infinity, minHeight: 48)
                     .background(Color.ds.flamingo)
                     .cornerRadius(50)
-                    .opacity(formIsValid ? 1.0 : 0.5)
+                    .opacity(viewModel.formIsValid ? 1.0 : 0.5)
                 }
-                .disabled(!formIsValid)
+                .disabled(!viewModel.formIsValid)
 
                 NavigationLink {
                   RegisterView(viewModel: .init())
@@ -101,15 +101,6 @@ struct MailLoginView: View {
           message: Text(viewModel.hasError?.localizedDescription ?? ""))
       }
     }
-  }
-}
-
-extension MailLoginView: AuthenticationFormProtocol {
-  var formIsValid: Bool {
-    return !viewModel.email.isEmpty
-      && viewModel.email.contains("@")
-      && !viewModel.password.isEmpty
-      && viewModel.password.count > 5
   }
 }
 

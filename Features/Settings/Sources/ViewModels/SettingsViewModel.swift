@@ -21,7 +21,6 @@ final class SettingsViewModel: ObservableObject {
         self.user = user
     }
     
-    
     @ViewBuilder
     func getAppleSignInButton() -> AppleSignInButton {
         comfirmAppleSignInUseCase.execute(completion: { result in

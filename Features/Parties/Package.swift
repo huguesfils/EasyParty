@@ -15,7 +15,8 @@ let package = Package(
     dependencies: [
         .package(path: "../TechLibs/CloudDBClient"),
         .package(path: "../TechLibs/SharedDomain"),
-        .package(path: "../Features/Auth")
+        .package(path: "../Features/Auth"),
+        .package(path: "../Features/Settings")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -23,7 +24,7 @@ let package = Package(
         .target(
             name: "Parties",
             dependencies: [
-                "CloudDBClient", "SharedDomain", "Auth"
+                "CloudDBClient", "SharedDomain", "Auth", "Settings"
             ]),
         .testTarget(
             name: "PartiesTests",

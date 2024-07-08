@@ -16,7 +16,7 @@ private enum FocusableField: Hashable {
 }
 
 struct RegisterView: View {
-  @ObservedObject var viewModel: AuthViewModel
+  @ObservedObject var viewModel: RegisterViewModel
   @FocusState private var focus: FocusableField?
 
   var body: some View {
@@ -75,10 +75,10 @@ struct RegisterView: View {
                   .frame(maxWidth: .infinity, minHeight: 48)
                   .background(Color.ds.flamingo)
                   .cornerRadius(50)
-                  .opacity(formIsValid ? 1.0 : 0.5)
+                  .opacity(viewModel.formIsValid ? 1.0 : 0.5)
               }
               .padding(.top, 15)
-              .disabled(!formIsValid)
+              .disabled(!viewModel.formIsValid)
             }
 
           }
@@ -97,17 +97,6 @@ struct RegisterView: View {
     }
   }
      
-}
-
-extension RegisterView: AuthenticationFormProtocol {
-  var formIsValid: Bool {
-    return !viewModel.email.isEmpty
-      && viewModel.email.contains("@")
-      && !viewModel.password.isEmpty
-      && viewModel.password.count > 5
-      && viewModel.confirmPassword == viewModel.password
-      && !viewModel.fullname.isEmpty
-  }
 }
 
 #Preview {

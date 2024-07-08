@@ -11,7 +11,11 @@ import SharedDomain
 import Factory
 
 public struct LoginView: View {
-    @ObservedObject var viewModel: AuthViewModel
+    @ObservedObject var viewModel: LoginViewModel
+    
+    public init() { 
+        _viewModel = .init(wrappedValue: .init())
+    }
     
     public var body: some View {
         NavigationStack {
@@ -82,5 +86,5 @@ public struct LoginView: View {
 }
 
 #Preview {
-    LoginView(viewModel: .init())
+    LoginView()
 }

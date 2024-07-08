@@ -15,7 +15,7 @@ struct ContentView: View {
         if viewModel.isLoggedIn {
             TabBarView()
         } else {
-            AuthInjector.getLoginView()
+            LoginView()
         }
     }
 }

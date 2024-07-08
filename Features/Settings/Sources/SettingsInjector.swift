@@ -28,8 +28,4 @@ extension Container {
     var comfirmAppleSignInUseCase: Factory<ComfirmAppleSignInUseCase> {
         self { DefaultComfirmAppleSignInUseCase(repository: self.repository.resolve(), appleSignInService: AppInjector.shared.appleService) }
     }
-    
-    public static func getSettingsView(_ user: User) -> SettingsView {
-        return  SettingsView(viewModel: .init(user: user))
-    }
 }

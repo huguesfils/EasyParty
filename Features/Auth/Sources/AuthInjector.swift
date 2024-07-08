@@ -52,10 +52,6 @@ extension Container {
         FirebaseApp.configure()
     }
     
-    public static func getLoginView() -> LoginView {
-        return LoginView(viewModel: .init())
-    }
-    
     var authService: Factory<FirebaseAuthService> {
         self { DefaultFirebaseAuthService(cloudDbClient: self.cloudDBClient.resolve()) }.singleton
     }
