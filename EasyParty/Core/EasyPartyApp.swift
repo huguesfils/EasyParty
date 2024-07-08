@@ -8,6 +8,7 @@
 import SwiftUI
 import Auth
 import Factory
+import FirebaseCore
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     
@@ -15,6 +16,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
+        
+        FirebaseApp.configure()
         
         return true
     }

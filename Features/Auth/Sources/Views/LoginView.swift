@@ -11,7 +11,7 @@ import SharedDomain
 import Factory
 
 public struct LoginView: View {
-    @ObservedObject var viewModel: LoginViewModel
+    @StateObject private var viewModel: LoginViewModel
     
     public init() { 
         _viewModel = .init(wrappedValue: .init())
@@ -72,7 +72,7 @@ public struct LoginView: View {
             .cornerRadius(10)
             .buttonStyle(.bordered)
             
-            NavigationLink(destination: MailLoginView(viewModel: .init())) {
+            NavigationLink(destination: MailLoginView()) {
                 Label("Continuer avec l'email", systemImage: "envelope")
                     .frame(maxWidth: .infinity)
                     .padding()

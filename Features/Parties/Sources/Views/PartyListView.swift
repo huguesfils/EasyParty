@@ -12,6 +12,8 @@ import Settings
 public struct PartyListView: View {
     @State private var isShowingSettings = false
     
+    public init() { }
+    
     public var body: some View {
         NavigationStack {
             VStack{

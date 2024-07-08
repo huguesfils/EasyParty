@@ -20,6 +20,12 @@ public struct CustomDateField: View {
     var header: String
     var icon: String
     
+    public init(selectedDate:  Binding<Date>, header: String, icon: String) {
+        self._selectedDate = selectedDate
+        self.header = header
+        self.icon = icon
+    }
+    
     public var body: some View {
         VStack(alignment: .leading) {
             Text(header)

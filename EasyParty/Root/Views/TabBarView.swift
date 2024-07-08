@@ -15,7 +15,7 @@ struct TabBarView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $selection) {
-                PartiesInjector.getPartyListView()
+                PartyListView()
                     .tabItem {
                         Label("Mes soirées", systemImage: "party.popper.fill")
                     }
@@ -27,7 +27,7 @@ struct TabBarView: View {
                     }.frame(width: 1)
                     .tag(1)
                 
-                PartiesInjector.getInviteListView()
+                InviteListView()
                     .tabItem {
                         Label("Mes invitations", systemImage: "calendar.badge.plus")
                     }
@@ -55,7 +55,7 @@ struct TabBarView: View {
             }
         }
         .sheet(isPresented: $isPresenting) {
-            PartiesInjector.getAddPartyView()
+            AddPartyView(party: nil)
         }
     }
 }
