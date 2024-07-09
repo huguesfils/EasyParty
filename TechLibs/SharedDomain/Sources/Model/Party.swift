@@ -36,5 +36,5 @@ public struct PartyItem: Codable, Identifiable, Equatable {
 }
 
 public extension Party {
-    static var mock = Party(id: NSUUID().uuidString, title: "Anniversaire HUgues", date: Date(), partyItems: [PartyItem(title: "Chips", completed: false)], imageUrl: "")
+    static var mock = Party(id: NSUUID().uuidString, title: "Anniversaire Hugues", date: Date(), partyItems: [PartyItem(title: "Chips", completed: false)], imageUrl: "")
 }

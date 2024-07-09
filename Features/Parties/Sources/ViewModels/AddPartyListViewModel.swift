@@ -17,10 +17,13 @@ final class AddPartyListViewModel: ObservableObject {
     @Published var selectedItems: [PhotosPickerItem] = []
     @Published var partyImageData: Data?
     @Published var isImageLoading = false
+    @Published var partyItems: [PartyItem] = []
     
     @Published var party: Party?
         
-        init(party: Party?) {
-            self.party = party
-        }
+    init(title: String, party: Party? = nil) {
+        _title = State(initialValue: party?.title ?? "")
+       
+        self.party = party
+    }
 }

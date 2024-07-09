@@ -12,7 +12,7 @@ import SharedDomain
 public struct AddPartyView: View {
     @StateObject private var viewModel: AddPartyListViewModel
     @Environment(\.dismiss) var dismiss
-    
+    @State private var showPartyItemSheet = false
     public init(party: Party?) {
         _viewModel = .init(wrappedValue: .init(party: party ?? nil))
     }
@@ -20,15 +20,16 @@ public struct AddPartyView: View {
     public var body: some View {
         NavigationStack {
             ScrollView {
-                HStack {
+                VStack {
                     photoPickerView()
                     
                     VStack {
-                        CustomFormField(text: $viewModel.title, header: "TITRE", icon: "party.popper.fill")
+                        CustomFormField(text: viewModel.title, header: "TITRE", icon: "party.popper.fill")
                             .disableAutocorrection(true)
                             .submitLabel(.next)
                         
                         CustomDateField(selectedDate: $viewModel.date, header: "DATE", icon: "calendar")
+                        
                     }
                     
                 }
@@ -39,37 +40,37 @@ public struct AddPartyView: View {
             .background(Color.ds.customBackground)
         }
         .navigationTitle(viewModel.party?.title ?? "Nouvelle soirée")
-              .navigationBarTitleDisplayMode(.inline)
-              .toolbar {
-                  ToolbarItem(placement: .topBarLeading) {
-                      Button(action: {
-                          dismiss()
-                      }) {
-                          Image(systemName: "Trash")
-                              .foregroundStyle(.red)
-                      }
-                  }
-//                ToolbarItem(placement: .navigationBarLeading) {
-//                    Button(action: {
-//                      dismiss()
-//                    }) {
-//                      Image(systemName: "trash")
-//                        .foregroundStyle(.red)
-//                    }
-//                }
-                ToolbarItem(placement: .topBarTrailing) {
-                  Button(action: {
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button(action: {
                     dismiss()
-                  }) {
-                    Text("Enregistrer")
-                          .foregroundStyle(Color.ds.flamingo)
-                      .fontWeight(.semibold)
-                  }
-                  .disabled(viewModel.title.isEmpty)
+                }) {
+                    Image(systemName: "Trash")
+                        .foregroundStyle(.red)
                 }
-              }
+            }
+            //                ToolbarItem(placement: .navigationBarLeading) {
+            //                    Button(action: {
+            //                      dismiss()
+            //                    }) {
+            //                      Image(systemName: "trash")
+            //                        .foregroundStyle(.red)
+            //                    }
+            //                }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: {
+                    dismiss()
+                }) {
+                    Text("Enregistrer")
+                        .foregroundStyle(Color.ds.flamingo)
+                        .fontWeight(.semibold)
+                }
+                .disabled(viewModel.title.isEmpty)
+            }
+        }
     }
-    
+
     @ViewBuilder
     private func photoPickerView() -> some View {
         PhotosPicker(
@@ -112,7 +113,7 @@ public struct AddPartyView: View {
                     viewModel.isImageLoading = false
                     switch result {
                     case .success(let data):
-                        self.viewModel.partyImageData = data
+                        viewModel.partyImageData = data
                     case .failure(let error):
                         print("Error loading image data: \(error.localizedDescription)")
                     }
@@ -120,7 +121,6 @@ public struct AddPartyView: View {
             }
         }
     }
-    
 }
 
 #Preview {
