@@ -12,6 +12,7 @@
 		BB60E6302C075C1400D77BD4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB60E62E2C075C1400D77BD4 /* ContentView.swift */; };
 		BB60E6322C07609000D77BD4 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB60E6312C07609000D77BD4 /* ContentViewModel.swift */; };
 		BB61456C2C2DAB98003B4F48 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = BB61456B2C2DAB98003B4F48 /* Settings */; };
+		BB6B53F42C3EDB5E00A7E649 /* FlowStacks in Frameworks */ = {isa = PBXBuildFile; productRef = BB6B53F32C3EDB5E00A7E649 /* FlowStacks */; };
 		BB6E85F72C21E3DB00D2FBC0 /* CloudDBClient in Frameworks */ = {isa = PBXBuildFile; productRef = BB6E85F62C21E3DA00D2FBC0 /* CloudDBClient */; };
 		BB6E85FD2C22012700D2FBC0 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = BB6E85FC2C22012700D2FBC0 /* Auth */; };
 		BBC178592BFE210800FE8FB7 /* EasyPartyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC178582BFE210800FE8FB7 /* EasyPartyApp.swift */; };
@@ -107,6 +108,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB61456C2C2DAB98003B4F48 /* Settings in Frameworks */,
+				BB6B53F42C3EDB5E00A7E649 /* FlowStacks in Frameworks */,
 				BB6E85FD2C22012700D2FBC0 /* Auth in Frameworks */,
 				BB6E85F72C21E3DB00D2FBC0 /* CloudDBClient in Frameworks */,
 				BB21AD032C343F7A00EF0C67 /* Parties in Frameworks */,
@@ -300,6 +302,7 @@
 				BB6E85FC2C22012700D2FBC0 /* Auth */,
 				BB61456B2C2DAB98003B4F48 /* Settings */,
 				BB21AD022C343F7A00EF0C67 /* Parties */,
+				BB6B53F32C3EDB5E00A7E649 /* FlowStacks */,
 			);
 			productName = EasyParty;
 			productReference = BBC178552BFE210800FE8FB7 /* EasyParty.app */;
@@ -375,6 +378,7 @@
 			);
 			mainGroup = BBC1784C2BFE210800FE8FB7;
 			packageReferences = (
+				BB6B53F22C3EDB5E00A7E649 /* XCRemoteSwiftPackageReference "FlowStacks" */,
 			);
 			productRefGroup = BBC178562BFE210800FE8FB7 /* Products */;
 			projectDirPath = "";
@@ -782,6 +786,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		BB6B53F22C3EDB5E00A7E649 /* XCRemoteSwiftPackageReference "FlowStacks" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/johnpatrickmorgan/FlowStacks.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.6.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		BB21AD022C343F7A00EF0C67 /* Parties */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -790,6 +805,11 @@
 		BB61456B2C2DAB98003B4F48 /* Settings */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Settings;
+		};
+		BB6B53F32C3EDB5E00A7E649 /* FlowStacks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB6B53F22C3EDB5E00A7E649 /* XCRemoteSwiftPackageReference "FlowStacks" */;
+			productName = FlowStacks;
 		};
 		BB6E85F62C21E3DA00D2FBC0 /* CloudDBClient */ = {
 			isa = XCSwiftPackageProductDependency;

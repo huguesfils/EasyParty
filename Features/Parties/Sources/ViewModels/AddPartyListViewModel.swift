@@ -12,18 +12,18 @@ import _PhotosUI_SwiftUI
 import SharedDomain
 
 final class AddPartyListViewModel: ObservableObject {
-//    @Published var title: String = ""
-//    @Published var date: Date = Date()
-//    @Published var selectedItems: [PhotosPickerItem] = []
-//    @Published var partyImageData: Data?
-//    @Published var isImageLoading = false
-//    @Published var partyItems: [PartyItem] = []
-//    
-//    @Published var party: Party?
-//        
-//    init(party: Party? = nil) {
-//        _title = State(initialValue: party?.title ?? "")
-//       
-//        self.party = party
-//    }
+    @Published var title: String
+    @Published var date: Date = Date()
+    @Published var selectedItems: [PhotosPickerItem] = []
+    @Published var partyImageData: Data?
+    @Published var isImageLoading = false
+    @Published var partyItems: [PartyItem] = []
+    
+    @Published var party: Party?
+        
+    init(party: Party? = nil) {
+        title = party?.title ?? ""
+       
+        self.party = party
+    }
 }

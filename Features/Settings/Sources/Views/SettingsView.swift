@@ -51,6 +51,8 @@ public struct SettingsView: View {
                             ActivityView(activityItems: ["Découvrez l'application Easy Party ! Téléchargez-la ici : [lien de téléchargement]"])
                         }
                         
+                    
+                        
                         Button {
                             navigateToTerms = true
                         } label: {
