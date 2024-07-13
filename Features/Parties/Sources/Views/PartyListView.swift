@@ -29,13 +29,18 @@ public struct PartyListView: View {
             .navigationBarTitleDisplayMode(.automatic)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    if let data = UserDefaults.standard.object(forKey: "currentUser") as? Data, let user = try? JSONDecoder().decode(User.self, from: data) {
-                        NavigationLink(destination: SettingsView(user: user)) {
-                            Image(systemName: "gearshape.fill")
-                                .foregroundColor(Color("flamingo"))
-                                .accessibilityLabel("Paramètres")
-                        }
+                    Button(action: {
+                        isShowingSettings = true
+                    }) {
+                        Image(systemName: "gearshape.fill")
+                            .foregroundColor(Color("flamingo"))
+                            .accessibilityLabel("Paramètres")
                     }
+                }
+            }
+            .sheet(isPresented: $isShowingSettings) {
+                if let data = UserDefaults.standard.object(forKey: "currentUser") as? Data, let user = try? JSONDecoder().decode(User.self, from: data) {
+                    SettingsView(user: user)
                 }
             }
         }
