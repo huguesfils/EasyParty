@@ -38,7 +38,7 @@ public struct PartyListView: View {
                     }
                 }
             }
-            .sheet(isPresented: $isShowingSettings) {
+            .fullScreenCover(isPresented: $isShowingSettings) {
                 if let data = UserDefaults.standard.object(forKey: "currentUser") as? Data, let user = try? JSONDecoder().decode(User.self, from: data) {
                     SettingsView(user: user)
                 }
