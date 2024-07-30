@@ -1,14 +1,15 @@
 //
-//  ContentViewViewModel.swift
+//  AppCoordinator.swift
 //  EasyParty
 //
-//  Created by Hugues Fils on 29/05/2024.
+//  Created by Hugues Fils on 26/07/2024.
 //
 
 import SharedDomain
 import Foundation
+import SwiftUI
 
-final class ContentViewModel: ObservableObject {
+private final class AppCoordinatorViewModel: ObservableObject {
     @Published var isLoggedIn: Bool = false
     
     init() {
@@ -27,3 +28,17 @@ final class ContentViewModel: ObservableObject {
         isLoggedIn = false
     }
 }
+
+struct AppCoordinator: View {
+    @StateObject private var viewModel = AppCoordinatorViewModel()
+    
+    var body: some View {
+        if viewModel.isLoggedIn {
+            TabCoordinator()
+        } else {
+            AuthCoordinator()
+        }
+        
+    }
+}
+

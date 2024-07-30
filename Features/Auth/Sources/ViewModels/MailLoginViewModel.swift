@@ -10,9 +10,25 @@ import SwiftUI
 import SharedDomain
 import Factory
 
+public struct MailLoginViewModelActions: NavigationHashableActions {
+    let showRegister: () -> Void
+    let showResetPassword: () -> Void
+    
+    public init(showRegister: @escaping () -> Void, showResetPassword: @escaping () -> Void) {
+        self.showRegister = showRegister
+        self.showResetPassword = showResetPassword
+    }
+}
+
 final class MailLoginViewModel: ObservableObject {
     
     @Injected(\.loginWithEmailUseCase) var loginWithEmailUseCase: LoginWithEmailUseCase
+    
+    private let actions: MailLoginViewModelActions
+    
+    init(actions: MailLoginViewModelActions) {
+        self.actions = actions
+    }
     
     @Published var email: String = ""
     @Published var password: String = ""
@@ -21,11 +37,11 @@ final class MailLoginViewModel: ObservableObject {
     @Published var showAlert: Bool = false
     
     var formIsValid: Bool {
-       return !email.isEmpty
-         && email.contains("@")
-         && !password.isEmpty
-         && password.count > 5
-     }
+        return !email.isEmpty
+        && email.contains("@")
+        && !password.isEmpty
+        && password.count > 5
+    }
     
     @MainActor
     func signInWithEmailPassword() async {
@@ -39,5 +55,13 @@ final class MailLoginViewModel: ObservableObject {
             self.hasError = failure
             showAlert = true
         }
+    }
+    
+    func registerBtnTapped() {
+        self.actions.showRegister()
+    }
+    
+    func resetPasswordBtnTapped() {
+        self.actions.showResetPassword()
     }
 }

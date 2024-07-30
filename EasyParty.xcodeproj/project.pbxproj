@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB12E91B2C540BCC009F1B32 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB12E91A2C540BCC009F1B32 /* AppCoordinator.swift */; };
+		BB12E91D2C540C66009F1B32 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB12E91C2C540C66009F1B32 /* AuthCoordinator.swift */; };
 		BB21AD032C343F7A00EF0C67 /* Parties in Frameworks */ = {isa = PBXBuildFile; productRef = BB21AD022C343F7A00EF0C67 /* Parties */; };
 		BB60E62F2C075C1400D77BD4 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB60E62D2C075C1400D77BD4 /* TabBarView.swift */; };
-		BB60E6302C075C1400D77BD4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB60E62E2C075C1400D77BD4 /* ContentView.swift */; };
-		BB60E6322C07609000D77BD4 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB60E6312C07609000D77BD4 /* ContentViewModel.swift */; };
 		BB61456C2C2DAB98003B4F48 /* Settings in Frameworks */ = {isa = PBXBuildFile; productRef = BB61456B2C2DAB98003B4F48 /* Settings */; };
+		BB6394652C586343008F8707 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6394642C586343008F8707 /* TabCoordinator.swift */; };
+		BB6394682C586388008F8707 /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6394672C586388008F8707 /* TabBarViewModel.swift */; };
 		BB6B53F42C3EDB5E00A7E649 /* FlowStacks in Frameworks */ = {isa = PBXBuildFile; productRef = BB6B53F32C3EDB5E00A7E649 /* FlowStacks */; };
 		BB6E85F72C21E3DB00D2FBC0 /* CloudDBClient in Frameworks */ = {isa = PBXBuildFile; productRef = BB6E85F62C21E3DA00D2FBC0 /* CloudDBClient */; };
 		BB6E85FD2C22012700D2FBC0 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = BB6E85FC2C22012700D2FBC0 /* Auth */; };
@@ -61,13 +63,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB12E91A2C540BCC009F1B32 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		BB12E91C2C540C66009F1B32 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		BB21AD012C343BA400EF0C67 /* Parties */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Parties; sourceTree = "<group>"; };
 		BB2392F22BFFA33F00F59F68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BB2392F32BFFA37A00F59F68 /* EasyParty.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EasyParty.entitlements; sourceTree = "<group>"; };
 		BB60E62D2C075C1400D77BD4 /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
-		BB60E62E2C075C1400D77BD4 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		BB60E6312C07609000D77BD4 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		BB61456A2C2DA4EF003B4F48 /* Settings */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Settings; sourceTree = "<group>"; };
+		BB6394642C586343008F8707 /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
+		BB6394672C586388008F8707 /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
 		BB6E85F42C21DCEC00D2FBC0 /* CloudDBClient */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CloudDBClient; sourceTree = "<group>"; };
 		BB6E85F92C21F13500D2FBC0 /* Auth */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Auth; sourceTree = "<group>"; };
 		BB6E85FB2C21FB7F00D2FBC0 /* SharedDomain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SharedDomain; sourceTree = "<group>"; };
@@ -132,19 +136,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB12E9192C540B9B009F1B32 /* Navigations */ = {
+			isa = PBXGroup;
+			children = (
+				BB12E91A2C540BCC009F1B32 /* AppCoordinator.swift */,
+				BB12E91C2C540C66009F1B32 /* AuthCoordinator.swift */,
+				BB6394642C586343008F8707 /* TabCoordinator.swift */,
+			);
+			path = Navigations;
+			sourceTree = "<group>";
+		};
 		BB60E62B2C075BE600D77BD4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BB60E62E2C075C1400D77BD4 /* ContentView.swift */,
 				BB60E62D2C075C1400D77BD4 /* TabBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		BB60E62C2C075BEE00D77BD4 /* ViewModels */ = {
+		BB6394662C58637A008F8707 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				BB60E6312C07609000D77BD4 /* ContentViewModel.swift */,
+				BB6394672C586388008F8707 /* TabBarViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -201,9 +214,10 @@
 		BBC178572BFE210800FE8FB7 /* EasyParty */ = {
 			isa = PBXGroup;
 			children = (
+				BBC178822BFE21E800FE8FB7 /* Core */,
 				BB2392F32BFFA37A00F59F68 /* EasyParty.entitlements */,
 				BB2392F22BFFA33F00F59F68 /* Info.plist */,
-				BBC178822BFE21E800FE8FB7 /* Core */,
+				BB12E9192C540B9B009F1B32 /* Navigations */,
 				BBC178832BFE220200FE8FB7 /* Root */,
 			);
 			path = EasyParty;
@@ -250,7 +264,7 @@
 		BBC178832BFE220200FE8FB7 /* Root */ = {
 			isa = PBXGroup;
 			children = (
-				BB60E62C2C075BEE00D77BD4 /* ViewModels */,
+				BB6394662C58637A008F8707 /* ViewModels */,
 				BB60E62B2C075BE600D77BD4 /* Views */,
 			);
 			path = Root;
@@ -442,10 +456,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB6394652C586343008F8707 /* TabCoordinator.swift in Sources */,
+				BB12E91D2C540C66009F1B32 /* AuthCoordinator.swift in Sources */,
 				BB60E62F2C075C1400D77BD4 /* TabBarView.swift in Sources */,
 				BBC178592BFE210800FE8FB7 /* EasyPartyApp.swift in Sources */,
-				BB60E6302C075C1400D77BD4 /* ContentView.swift in Sources */,
-				BB60E6322C07609000D77BD4 /* ContentViewModel.swift in Sources */,
+				BB6394682C586388008F8707 /* TabBarViewModel.swift in Sources */,
+				BB12E91B2C540BCC009F1B32 /* AppCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

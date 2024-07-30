@@ -13,36 +13,28 @@ import Factory
 public struct LoginView: View {
     @StateObject private var viewModel: LoginViewModel
     
-    public init() { 
-        _viewModel = .init(wrappedValue: .init())
+    public init(actions: LoginViewModelActions) {
+        _viewModel = .init(wrappedValue: .init(actions: actions))
     }
     
     public var body: some View {
-        NavigationStack {
-            VStack(spacing: 20) {
-                
-                IntroLogin()
-                
-                Spacer()
-                
-                if viewModel.isLoading {
-                    CustomProgressView()
-                } else {
-                    buttons()
-                }
-                
-                Spacer()
+        VStack(spacing: 20) {
+            
+            IntroLogin()
+                .padding(.top, 20)
+            
+            Spacer()
+            
+            if viewModel.isLoading {
+                CustomProgressView()
+            } else {
+                buttons()
             }
-            .frame(maxWidth: .infinity)
-            .background(Color.ds.customBackground)
-            .navigationTitle("Connexions")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("Titre Invisible").opacity(0)
-                }
-            }
+            
+            Spacer()
         }
+        .frame(maxWidth: .infinity)
+        .background(Color.ds.customBackground)
     }
     
     @ViewBuilder
@@ -72,19 +64,22 @@ public struct LoginView: View {
             .cornerRadius(10)
             .buttonStyle(.bordered)
             
-            NavigationLink(destination: MailLoginView()) {
-                Label("Continuer avec l'email", systemImage: "envelope")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .foregroundColor(.black)
-                    .background(Color.white)
-                    .cornerRadius(10)
-            }
+            
+            Label("Continuer avec l'email", systemImage: "envelope")
+                .frame(maxWidth: .infinity)
+                .padding()
+                .foregroundColor(.black)
+                .background(Color.white)
+                .cornerRadius(10)
+                .onTapGesture {
+                    viewModel.mailLoginBtnTapped()
+                }
+            
         }
         .padding()
     }
 }
 
 #Preview {
-    LoginView()
+    LoginView(actions: .init(showMailLogin: {}))
 }

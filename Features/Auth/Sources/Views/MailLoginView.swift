@@ -13,102 +13,100 @@ private enum FocusableField: Hashable {
     case password
 }
 
-struct MailLoginView: View {
+public struct MailLoginView: View {
     @StateObject private var viewModel: MailLoginViewModel
     @FocusState private var focus: FocusableField?
     
-    public init() {
-            _viewModel = .init(wrappedValue: .init())
-        }
-
+    public init(actions: MailLoginViewModelActions) {
+        _viewModel = .init(wrappedValue: .init(actions: actions))
+    }
     
-    var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.ds.customBackground.ignoresSafeArea()
-                GeometryReader { geometry in
-                    ScrollView {
+    
+    public var body: some View {
+        ZStack {
+            Color.ds.customBackground.ignoresSafeArea()
+            GeometryReader { geometry in
+                ScrollView {
+                    VStack {
                         VStack {
-                            VStack {
-                                IntroLogin().frame(maxWidth: .infinity)
-                                CustomFormField(text: $viewModel.email, header: "EMAIL", icon: "envelope")
-                                    .focused($focus, equals: .email)
-                                    .submitLabel(.next)
-                                    .onSubmit {
-                                        self.focus = .password
-                                    }
-                                
-                                CustomFormField(
-                                    text: $viewModel.password, header: "MOT DE PASSE", icon: "lock", isSecure: true
-                                )
-                                .focused($focus, equals: .password)
-                                .submitLabel(.go)
+                            IntroLogin().frame(maxWidth: .infinity)
+                            CustomFormField(text: $viewModel.email, header: "EMAIL", icon: "envelope")
+                                .focused($focus, equals: .email)
+                                .submitLabel(.next)
                                 .onSubmit {
-                                    Task {
-                                        await viewModel.signInWithEmailPassword()
-                                    }
+                                    self.focus = .password
                                 }
-                                
-                                NavigationLink {
-                                    ResetPasswordView()
-                                } label: {
-                                    Text("Mot de passe oublié ?")
-                                        .font(.system(size: 13, weight: .semibold))
-                                    
+                            
+                            CustomFormField(
+                                text: $viewModel.password, header: "MOT DE PASSE", icon: "lock", isSecure: true
+                            )
+                            .focused($focus, equals: .password)
+                            .submitLabel(.go)
+                            .onSubmit {
+                                Task {
+                                    await viewModel.signInWithEmailPassword()
                                 }
-                                .padding(.top, 15)
-                                .frame(maxWidth: .infinity, alignment: .trailing)
                             }
                             
-                            Spacer()
-                            
-                            VStack {
-                                Button(action: {
-                                    Task {
-                                        await viewModel.signInWithEmailPassword()
-                                    }
-                                }) {
-                                    Text("Se connecter")
-                                        .fontWeight(.semibold)
-                                        .foregroundStyle(.white)
-                                        .frame(maxWidth: .infinity, minHeight: 48)
-                                        .background(Color.ds.flamingo)
-                                        .cornerRadius(50)
-                                        .opacity(viewModel.formIsValid ? 1.0 : 0.5)
-                                }
-                                .disabled(!viewModel.formIsValid)
-                                
-                                NavigationLink {
-                                    RegisterView()
-                                } label: {
-                                    HStack {
-                                        Text("Vous n'avez pas de compte ?")
-                                        Text("S'enregister")
-                                            .fontWeight(.bold)
-                                            .color(.ds.flamingo)
-                                    }
-                                    .font(.system(size: 14))
-                                    .padding()
-                                }
-                            }
+                            Button(action: {
+                                viewModel.resetPasswordBtnTapped()
+                            }, label: {
+                                Text("Mot de passe oublié ?")
+                                    .font(.system(size: 13, weight: .semibold))
+                            })
+                            .padding(.top, 15)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
                         }
-                        .padding()
-                        .frame(minHeight: geometry.size.height)
+                        
+                        Spacer()
+                        
+                        VStack {
+                            Button(action: {
+                                Task {
+                                    await viewModel.signInWithEmailPassword()
+                                }
+                            }) {
+                                Text("Se connecter")
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(.white)
+                                    .frame(maxWidth: .infinity, minHeight: 48)
+                                    .background(Color.ds.flamingo)
+                                    .cornerRadius(50)
+                                    .opacity(viewModel.formIsValid ? 1.0 : 0.5)
+                            }
+                            .disabled(!viewModel.formIsValid)
+                            
+                            Button(action: {
+                                viewModel.registerBtnTapped()
+                            }, label: {
+                                HStack {
+                                    Text("Vous n'avez pas de compte ?")
+                                    Text("S'enregister")
+                                        .fontWeight(.bold)
+                                        .color(.ds.flamingo)
+                                }
+                                .font(.system(size: 14))
+                                .padding()
+                            })
+                            
+                        }
                     }
-                }
-                if viewModel.isLoading == true {
-                    CustomProgressView()
+                    .padding()
+                    .frame(minHeight: geometry.size.height)
                 }
             }
-            .alert(isPresented: $viewModel.showAlert) {
-                Alert(
-                    title: Text("Erreur"),
-                    message: Text(viewModel.hasError?.localizedDescription ?? ""))
+            if viewModel.isLoading == true {
+                CustomProgressView()
             }
+        }
+        .alert(isPresented: $viewModel.showAlert) {
+            Alert(
+                title: Text("Erreur"),
+                message: Text(viewModel.hasError?.localizedDescription ?? ""))
         }
     }
 }
 
 #Preview {
-    MailLoginView()
+    MailLoginView(actions: .init(showRegister: {}, showResetPassword: {}))
 }

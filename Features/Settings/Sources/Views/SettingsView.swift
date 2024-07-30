@@ -10,6 +10,7 @@ import SwiftUI
 import SharedDomain
 
 public struct SettingsView: View {
+    
     @StateObject private var viewModel: SettingsViewModel
     @State private var showingDeleteAlert = false
     @State private var showingAppleSignInAlert = false
@@ -25,7 +26,6 @@ public struct SettingsView: View {
     }
     
     public var body: some View {
-        
         VStack {
             Text(viewModel.user.fullname)
                 .font(.title)
@@ -50,8 +50,6 @@ public struct SettingsView: View {
                     .sheet(isPresented: $showingShareSheet) {
                         ActivityView(activityItems: ["Découvrez l'application Easy Party ! Téléchargez-la ici : [lien de téléchargement]"])
                     }
-                    
-                    
                     
                     Button {
                         navigateToTerms = true
