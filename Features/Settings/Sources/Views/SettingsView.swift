@@ -5,7 +5,6 @@
 //  Created by Hugues Fils on 25/03/2024.
 //
 
-import PhotosUI
 import SwiftUI
 import SharedDomain
 
@@ -16,26 +15,22 @@ public struct SettingsView: View {
     @State private var showingAppleSignInAlert = false
     @Environment(\.dismiss) var dismiss
     
-    @State private var selectedItems: [PhotosPickerItem] = []
-    @State private var isImageLoading = false
-    @State private var navigateToTerms = false
-    @State private var showingShareSheet = false
-    
-    public init(user: User) {
-        _viewModel = .init(wrappedValue: .init(user: user))
+    public init(user: User, actions: SettingsViewModelActions) {
+        _viewModel = .init(wrappedValue: .init(user: user, actions: actions))
     }
     
     public var body: some View {
         VStack {
             Text(viewModel.user.fullname)
                 .font(.title)
+                .padding(.top, 40)
             
             Spacer()
             
             VStack {
                 List {
                     Button {
-                        showingShareSheet = true
+                        viewModel.activityBtnTapped()
                     } label: {
                         HStack {
                             Image(systemName: "arrowshape.turn.up.right")
@@ -47,12 +42,9 @@ public struct SettingsView: View {
                                 .foregroundStyle(Color.ds.flamingo)
                         }
                     }
-                    .sheet(isPresented: $showingShareSheet) {
-                        ActivityView(activityItems: ["Découvrez l'application Easy Party ! Téléchargez-la ici : [lien de téléchargement]"])
-                    }
                     
                     Button {
-                        navigateToTerms = true
+                        viewModel.termsBtnTapped()
                     } label: {
                         HStack {
                             Image(systemName: "doc")
@@ -119,7 +111,6 @@ public struct SettingsView: View {
         .sheet(isPresented: $showingAppleSignInAlert) {
             AppleSignInAlertView(viewModel: viewModel)
         }
-        .toolbar(.hidden, for: .tabBar)
         .navigationTitle("Paramètres")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(
@@ -129,9 +120,6 @@ public struct SettingsView: View {
                 .foregroundStyle(Color.ds.flamingo)
                 .fontWeight(.bold)
         )
-        .navigationDestination(isPresented: $navigateToTerms) {
-            TermsAndConditionsView()
-        }
     }
 }
 
@@ -154,5 +142,5 @@ private func AppleSignInAlertView(viewModel: SettingsViewModel) -> some View {
 }
 
 #Preview {
-    SettingsView(user: User.mock)
+    SettingsView(user: User.mock, actions: .init(showTerms: {}, showActivity: {}))
 }

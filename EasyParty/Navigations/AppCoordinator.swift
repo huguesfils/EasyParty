@@ -34,7 +34,7 @@ struct AppCoordinator: View {
     
     var body: some View {
         if viewModel.isLoggedIn {
-            TabCoordinator()
+            TabBarView()
         } else {
             AuthCoordinator()
         }

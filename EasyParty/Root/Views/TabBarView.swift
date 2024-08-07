@@ -15,7 +15,7 @@ struct TabBarView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $selection) {
-                PartyListView()
+                PartiesCoordinator()
                     .tabItem {
                         Label("Mes soirées", systemImage: "party.popper.fill")
                     }

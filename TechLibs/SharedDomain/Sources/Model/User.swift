@@ -13,7 +13,7 @@ public enum ConnectionType: Codable{
     case google
 }
 
-public struct User: Identifiable, Codable, Equatable {
+public struct User: Identifiable, Codable, Hashable {
     public let id: String
     public let fullname: String
     public let email: String
